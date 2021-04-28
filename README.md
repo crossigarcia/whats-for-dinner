@@ -9,3 +9,7 @@ Acceptance Criteria
 - two primary radio buttons: Search (random) or Search by criteria
 - display first recipe on the same page, with ability to go to the next item
 - save previous searches to localStorage
+
+Nice to Haves
+- back button
+- save favorite recipes to localStorage
