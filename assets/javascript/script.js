@@ -1,3 +1,6 @@
+//edamam api logic:
+let hitsIndex = 0;
+
 $('#keyword-btn').on('click', function() {
     $('#recipe-name').html('');
     $('#recipe-ingredients').html('');
@@ -15,8 +18,6 @@ function runEdamam(keyword) {
     .then(res => res.json())
     .then(data => {
         //let recipeHits = data.hits;
-        let hitsIndex = 0;
-
         let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
         $('#recipe-name').append(recipeName);
 
@@ -36,24 +37,32 @@ function runEdamam(keyword) {
 
 $('#next-recipe-btn').on('click', nextRecipe);
 
-function nextRecipe(hitsIndex) {
+ function nextRecipe() {
     let keyword = $('#keyword').val().trim();
-    $('#recipe-name').html('');
-    $('#recipe-ingredients').html('');
 
-    hitsIndex++;
+    if (hitsIndex <= 9) {
+        hitsIndex++
 
-    runEdamam(keyword);
-};
+        $('#recipe-name').html('');
+        $('#recipe-ingredients').html('');
+        $('#recipe-img').html('');
 
+        runEdamam(keyword);
+    } else {
+        $('#next-recipe-btn').disabled = true;
+        console.log("btn disabled");
+    }
+     
+ };
 
-var getMealDB = function () {
-    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function(response) {
-    response.json().then(function(data) {
-    console.log(data);
-  });
-});
-}
+//mealDB api logic:
+// var getMealDB = function () {
+//     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function(response) {
+//     response.json().then(function(data) {
+//     console.log(data);
+//   });
+// });
+// }
 
-$("#edamam-btn").on("click", runEdamam);
-$("#mealdb-btn").on("click", getMealDB);
+// $("#edamam-btn").on("click", runEdamam);
+// $("#mealdb-btn").on("click", getMealDB);
