@@ -1,0 +1,54 @@
+.hero {
+    text-align: center;
+    border-style: solid;
+    border-color: gray;
+}
+
+.row {
+    border-style: solid;
+    border-color: red;
+}
+
+.navBar {
+    border-style: solid;
+    border-color: blue;
+}
+
+.btn-section {
+    border-style: solid;
+    border-color: yellow;
+}
+
+.search-containers {
+    border-style: solid;
+    border-color: teal;
+}
+
+.name-container {
+    border-style: solid;
+    border-color: violet;
+}
+
+.ingredient-list-cont {
+    border-style: solid;
+    border-color: brown;
+}
+
+.description-section {
+    border-style: solid;
+    border: steelblue;
+}
+
+.next-btn {
+    background-color: turquoise;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 20px;
+}
+
+.search-btn {
+    background-color: cornflowerblue;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 20px;
+}
