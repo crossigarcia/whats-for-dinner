@@ -25,8 +25,9 @@ function runEdamam(keyword) {
     .then(data => {
         //let recipeHits = data.hits;
         let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
+        let nextButton = $('<button>').attr('id', 'nxt-btn').text('Next Recipe');
 
-        $('#recipe-name').append(recipeName);
+        $('#recipe-name').append(recipeName, nextButton);
 
         let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
         $('#recipe-img').append(recipeImg);
@@ -39,28 +40,35 @@ function runEdamam(keyword) {
         }
         $('#recipe-ingredients').append(ingredientsList);
 
+        let recipeLink = $('<a>').attr('href', data.hits[hitsIndex].recipe.url).text('Click here for recipe instructions');
+
+        $('.link').append(recipeLink);
+    })
+    .catch((error) => {
+        console.log(`error: ${error}`);
+        if (error) {
+            $('#recipe-display').empty();
+        }
     });
 };
 
-$('#next-recipe-btn').on('click', nextRecipe);
-
  function nextRecipe() {
+    
     let keyword = $('#keyword').val().trim();
-
-    if (hitsIndex <= 9) {
-        hitsIndex++
-
-        $('#recipe-name').empty();
-        $('#recipe-ingredients').empty();
-        $('#recipe-img').empty();
-
-        runEdamam(keyword);
-    } else {
-        $('#next-recipe-btn').disabled(true);
-        console.log("btn disabled");
-    }
+    hitsIndex++
+    runEdamam(keyword);
      
  };
+
+ $('#recipe-name').on('click', 'button', function() {
+    console.log(this);
+    $('#recipe-name').empty();
+    $('#recipe-ingredients').empty();
+    $('#recipe-img').empty();
+    $('.link').empty();
+
+    nextRecipe();
+ });
 
 //  Previous Searches
 
