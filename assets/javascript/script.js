@@ -49,7 +49,7 @@ $('#next-recipe-btn').on('click', nextRecipe);
 
         runEdamam(keyword);
     } else {
-        $('#next-recipe-btn').disabled = true;
+        $('#next-recipe-btn').disabled(true);
         console.log("btn disabled");
     }
      
