@@ -1,5 +1,10 @@
 //edamam api logic:
 let hitsIndex = 0;
+// let keyword = $('#keyword').val().trim();
+
+// nico's edamam api
+// id = 16faf740
+// key = 7e13ce2d929e6839de8e33e08b528146
 
 $('#keyword-btn').on('click', function() {
     $('#recipe-name').empty();
@@ -9,6 +14,7 @@ $('#keyword-btn').on('click', function() {
     let keyword = $('#keyword').val().trim();
 
     runEdamam(keyword);
+    searchHistory(keyword);
 });
 
 function runEdamam(keyword) {
@@ -55,3 +61,62 @@ $('#next-recipe-btn').on('click', nextRecipe);
     }
      
  };
+
+//  Previous Searches
+
+let searchHistoryArray = [];
+function searchHistory (keyword) {
+    // send the keyword to a user's local storage
+    localStorage.setItem("keyword", keyword);
+    console.log(keyword);
+    
+    // take the current keyword search term and place it at the beginning of an array
+    // searchHistoryArray.unshift(keyword);
+    // console.log(searchHistoryArray);
+
+    // for (let i = 0; i < searchHistoryArray.length; i++) {
+        var searchHistoryEl = document.querySelector("#previous-searches");
+        searchHistoryEl.classList = "enter css styling classes here"
+
+        var searchKeywordEl = document.createElement("h5");
+        searchKeywordEl.textContent = keyword;
+        console.log(keyword);
+
+        // append to the container div
+        searchHistoryEl.appendChild(searchKeywordEl);
+    // }
+}
+// add a feature such that if the user hits a certain count of search queries, the button either disables or
+// the div gets a scroll box (so they can have unlimited searches)
+
+// Saved Recipes
+
+function saveRecipe (saveThis) {
+    
+    var savedRecipesEl = document.querySelector("#saved-recipes");
+    savedRecipesEl.classList = "enter css styling classes here"
+
+    var recipeEl = document.createElement("button");
+    recipeEl.textContent = recipeName;
+
+    // append to the container div
+    savedRecipesEl.appendChild(recipeEl);
+}
+// need to make a save button when you render a recipe
+// need to make a button in saveRecipe() that will render that recipe
+
+
+
+
+console.log("search history worked");
+//mealDB api logic:
+// var getMealDB = function () {
+//     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function(response) {
+//     response.json().then(function(data) {
+//     console.log(data);
+//   });
+// });
+// }
+
+// $("#edamam-btn").on("click", runEdamam);
+// $("#mealdb-btn").on("click", getMealDB);
