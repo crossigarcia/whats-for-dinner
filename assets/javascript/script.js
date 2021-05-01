@@ -19,6 +19,7 @@ function runEdamam(keyword) {
     .then(data => {
         //let recipeHits = data.hits;
         let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
+
         $('#recipe-name').append(recipeName);
 
         let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
