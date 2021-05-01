@@ -38,7 +38,30 @@ function runEdamam(keyword) {
         }
         $('#recipe-ingredients').append(ingredientsList);
 
+        let saveRecipeBtn = document.createElement("button");
+        saveRecipeBtn.innerHTML = "Save This Recipe";
+        recipeName.append(saveRecipeBtn);
+
+        $(saveRecipeBtn).on('click', function saveRecipe() {
+            var savedRecipesEl = document.querySelector("#saved-recipes");
+            savedRecipesEl.classList = "enter css styling classes here";
+        
+            var recipeEl = document.createElement("button");
+            recipeEl.textContent = data.hits[hitsIndex].recipe.label;
+        
+            // append to the container div
+            savedRecipesEl.appendChild(recipeEl);
+
+            $(recipeEl).on('click', function reloadRecipe(){
+                // runEdamam() but for a specific recipe
+            });
+        });
+
+        
+        // need to make a save button when you render a recipe
+        // need to make a button in saveRecipe() that will render that recipe
     });
+    
 };
 
 $('#next-recipe-btn').on('click', nextRecipe);
@@ -90,19 +113,7 @@ function searchHistory (keyword) {
 
 // Saved Recipes
 
-function saveRecipe (saveThis) {
-    
-    var savedRecipesEl = document.querySelector("#saved-recipes");
-    savedRecipesEl.classList = "enter css styling classes here"
 
-    var recipeEl = document.createElement("button");
-    recipeEl.textContent = recipeName;
-
-    // append to the container div
-    savedRecipesEl.appendChild(recipeEl);
-}
-// need to make a save button when you render a recipe
-// need to make a button in saveRecipe() that will render that recipe
 
 
 
