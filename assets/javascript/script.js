@@ -2,9 +2,9 @@
 let hitsIndex = 0;
 
 $('#keyword-btn').on('click', function() {
-    $('#recipe-name').html('');
-    $('#recipe-ingredients').html('');
-    $('#recipe-img').html('');
+    $('#recipe-name').empty();
+    $('#recipe-ingredients').empty();
+    $('#recipe-img').empty();
 
     let keyword = $('#keyword').val().trim();
 
@@ -43,9 +43,9 @@ $('#next-recipe-btn').on('click', nextRecipe);
     if (hitsIndex <= 9) {
         hitsIndex++
 
-        $('#recipe-name').html('');
-        $('#recipe-ingredients').html('');
-        $('#recipe-img').html('');
+        $('#recipe-name').empty();
+        $('#recipe-ingredients').empty();
+        $('#recipe-img').empty();
 
         runEdamam(keyword);
     } else {
@@ -54,15 +54,3 @@ $('#next-recipe-btn').on('click', nextRecipe);
     }
      
  };
-
-//mealDB api logic:
-// var getMealDB = function () {
-//     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function(response) {
-//     response.json().then(function(data) {
-//     console.log(data);
-//   });
-// });
-// }
-
-// $("#edamam-btn").on("click", runEdamam);
-// $("#mealdb-btn").on("click", getMealDB);
