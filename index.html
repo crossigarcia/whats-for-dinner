@@ -10,19 +10,32 @@
 </head>
 <body>
     <header>
-        <div class="hero">
-            <h1>What's For Dinner?</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorem pariatur ullam quibusdam beatae in quisquam perferendis! Vero eveniet, consequuntur culpa soluta, rem adipisci ex voluptatum, ut provident reiciendis dolore.</p>
-            <!-- <img src="" alt=""> -->
+        <div class="uk-child-width-1@s uk-dark" uk-grid>
+                <div class="uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle hero" style="background-image: url(./assets/images/pexels-karolina-grabowska-4199098.jpg);">
+                    <p class="uk-h1">What's For Dinner?</p>
+                    <!--<p class="uk-h3" style="text-align: center; position: relative;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo sapiente ipsam quod nemo aut? Dicta nisi libero, suscipit rem repudiandae sed ea distinctio consequuntur voluptate quaerat, ad praesentium eaque reiciendis?</p> -->
+                </div>
         </div>
     </header>
-    <main>
+    <main class="uk-background-cover" style="background-image: url(./assets/images/pexels-karolina-grabowska-4199098.jpg);">
         <div class="row">
             <div class="uk-grid">
-                <div class="uk-width-1-3 navBar">
-                    <div class="row btn-section" id="search-radio">
-                        <button class="search-btn" id="edamam-btn">Edamam</button>
-                        <button class="search-btn" id="mealdb-btn">MealDB</button>
+                <div class=" transbox uk-card uk-card-default uk-card-body uk-width-1-3">
+                    <div class="row" id="search-radio uk-margin">
+                        <div class="uk-form-controls">
+                            <label><input id="keyword-radio" class="uk-radio" type="radio" name="radio1"> Search by Keyword</label><br>
+                            <div class="uk-margin">
+                                <input id="keyword" class="uk-input" type="text" placeholder="Keyword">
+                            </div>
+                            <button id="keyword-btn" class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Search</button>
+                        </div>
+                        <div class="uk-form-controls">
+                            <label><input id="criteria-radio" class="uk-radio" type="radio" name="radio1">Search by Criteria</label><br>
+                            <div class="uk-margin">
+                                <input id="criteria" class="uk-input" type="text" placeholder="criteria">
+                            </div>
+                            <button id="criteria-btn" class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Search</button>
+                        </div>
                     </div>
                     <div class="row search-containers" id="search-history">
                         <div class="row" id="previous-searches">
@@ -48,30 +61,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="uk-width-2-3">
-                    <div class="name-container">
-                    <h2>Recipe Name</h2>
-                    </div>
-                    <button class="next-btn" id="next-recipe-btn">Next Recipe</button>
+                <div id="recipe-display" class="uk-width-2-3">
+                    <div id="recipe-name"></div>
                     <div class="uk-grid recipe-content">
-                        <div class="uk-width-1-2 ingredient-list-cont">
-                            <img src="#"/>
-                            <div>
-                                <h4>Ingredient List</h4>
-                                <ul class="uk-list uk-list-disc">
-                                    <li>List item 1</li>
-                                    <li>List item 2</li>
-                                    <li>List item 3</li>
-                                </ul>
-                            </div>
+                        <div class="uk-width-1-2">
+                            <div id="recipe-img"></div>
                         </div>
-                        <div class="uk-width-1-2 description-section">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit minus cupiditate sapiente tempore quas nostrum doloremque reprehenderit nisi placeat, qui rem veritatis exercitationem est accusantium illo natus! Sit, asperiores natus.
+                        <div id="recipe-steps" class="uk-width-1-2">
+                            <div id="recipe-ingredients"></div>
                         </div>
                     </div>
-                    <div class="recipe-video">
-
-                    </div>
+                    <div class="link"></div>
+                    <div class="recipe-video"></div>
                 </div>
             </div>
         </div>
