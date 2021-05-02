@@ -10,26 +10,31 @@
 </head>
 <body>
     <header>
-        <div class="hero">
-            <h1>What's For Dinner?</h1>
-            <!-- <img src="" alt=""> -->
+        <div class="uk-child-width-1@s uk-dark" uk-grid>
+                <div class="uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle hero" style="background-image: url(./assets/images/pexels-karolina-grabowska-4199098.jpg);">
+                    <p class="uk-h1">What's For Dinner?</p>
+                    <!--<p class="uk-h3" style="text-align: center; position: relative;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo sapiente ipsam quod nemo aut? Dicta nisi libero, suscipit rem repudiandae sed ea distinctio consequuntur voluptate quaerat, ad praesentium eaque reiciendis?</p> -->
+                </div>
         </div>
     </header>
-    <main>
+    <main class="uk-background-cover" style="background-image: url(./assets/images/pexels-karolina-grabowska-4199098.jpg);">
         <div class="row">
             <div class="uk-grid">
-                <div class="uk-width-1-3">
+                <div class=" transbox uk-card uk-card-default uk-card-body uk-width-1-3">
                     <div class="row" id="search-radio uk-margin">
                         <div class="uk-form-controls">
                             <label><input id="keyword-radio" class="uk-radio" type="radio" name="radio1"> Search by Keyword</label><br>
                             <div class="uk-margin">
                                 <input id="keyword" class="uk-input" type="text" placeholder="Keyword">
                             </div>
-                            <button id="keyword-btn" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Search</button>
+                            <button id="keyword-btn" class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Search</button>
                         </div>
                         <div class="uk-form-controls">
-                            <label><input class="uk-radio" type="radio" name="radio1"> Option 02</label>
-                            <button id="mealdb-btn">MealDB</button>
+                            <label><input id="criteria-radio" class="uk-radio" type="radio" name="radio1">Search by Criteria</label><br>
+                            <div class="uk-margin">
+                                <input id="criteria" class="uk-input" type="text" placeholder="criteria">
+                            </div>
+                            <button id="criteria-btn" class="uk-button uk-button-secondary uk-width-1-1 uk-margin-small-bottom">Search</button>
                         </div>
                     </div>
                     <div class="row" id="search-history">
