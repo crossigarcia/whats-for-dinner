@@ -1,4 +1,9 @@
 let hitsIndex = 0;
+// let keyword = $('#keyword').val().trim();
+
+// nico's edamam api
+// id = 16faf740
+// key = 7e13ce2d929e6839de8e33e08b528146
 
 let mealID = [];
 var listTitle = document.querySelector("#recipe-name");
@@ -39,7 +44,11 @@ function runEdamam(keyword) {
         }
 
         $('#recipe-ingredients').append(ingredientsList);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 21c7a9e376c5542523a0339fcda6e90582a8f37b
         // Saved Recipes
 
         // trying to create an ID for edamam, which doesn't have explicit IDs
@@ -190,6 +199,7 @@ function runEdamam(keyword) {
      runEdamam(keyword);
  };
 
+<<<<<<< HEAD
  $('#recipe-name').on('click', '#prev-btn', function() {
     $('#recipe-name').empty();
     $('#recipe-ingredients').empty();
@@ -199,6 +209,8 @@ function runEdamam(keyword) {
     previousRecipe();
  });
 
+=======
+>>>>>>> 21c7a9e376c5542523a0339fcda6e90582a8f37b
 //  Previous Searches
 
 let searchHistoryArray = [];
