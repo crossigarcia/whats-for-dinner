@@ -43,6 +43,57 @@ function runEdamam(keyword) {
         let recipeLink = $('<a>').attr('href', data.hits[hitsIndex].recipe.url).text('Click here for recipe instructions');
 
         $('.link').append(recipeLink);
+
+        // Saved Recipes
+
+        // trying to create an ID for edamam, which doesn't have explicit IDs
+        let recipeID = data.hits[hitsIndex].recipe.label;
+        console.log("your recipe query was = " + recipeID);
+
+        let saveRecipeBtn = document.createElement("button");
+        saveRecipeBtn.innerHTML = "Save This Recipe";
+        recipeName.append(saveRecipeBtn);
+
+        $(saveRecipeBtn).on('click', function saveRecipe() {
+            var savedRecipesEl = document.querySelector("#saved-recipes");
+            savedRecipesEl.classList = "enter css styling classes here";
+        
+            var recipeEl = document.createElement("button");
+            recipeEl.textContent = data.hits[hitsIndex].recipe.label;
+        
+            // append to the container div
+            savedRecipesEl.appendChild(recipeEl);
+
+            $(recipeEl).on('click', function reloadRecipe(){
+                // runEdamam() but for a specific recipe
+
+                // clear the current contents
+                $('#recipe-name').empty();
+                $('#recipe-img').empty();
+                $('#recipe-ingredients').empty();
+
+                // producing the result again?
+                fetch(`https://api.edamam.com/search?q=${recipeID}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`)
+                .then(res => res.json())
+                .then(data => {
+
+                    //let recipeHits = data.hits;
+                    let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
+                    $('#recipe-name').append(recipeName);
+
+                    let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
+                    $('#recipe-img').append(recipeImg);
+
+                    let ingredientsList = $('<ul>').addClass('list');
+                    for (let i = 0; i < data.hits[hitsIndex].recipe.ingredientLines.length; i++) {
+                        let ingredientItem = $('<li>').addClass('list-item').text(data.hits[hitsIndex].recipe.ingredientLines[i]);
+
+                        ingredientsList.append(ingredientItem);
+                    }
+                    $('#recipe-ingredients').append(ingredientsList);
+                });
+            });
+        });
     })
     .catch((error) => {
         console.log(`error: ${error}`);
@@ -50,7 +101,9 @@ function runEdamam(keyword) {
             // $('#recipe-display').empty();
             //trigger modal "an error ocurred, please try your search again"
         }
+        
     });
+    
 };
 
  function nextRecipe() {
@@ -103,37 +156,21 @@ function searchHistory (keyword) {
     // take the current keyword search term and place it at the beginning of an array
     // searchHistoryArray.unshift(keyword);
     // console.log(searchHistoryArray);
+    var searchHistoryEl = document.querySelector("#previous-searches");
+    searchHistoryEl.classList = "enter css styling classes here"
 
-    // for (let i = 0; i < searchHistoryArray.length; i++) {
-        var searchHistoryEl = document.querySelector("#previous-searches");
-        searchHistoryEl.classList = "enter css styling classes here"
+    var searchKeywordEl = document.createElement("h5");
+    searchKeywordEl.textContent = keyword;
+    console.log(keyword);
 
-        var searchKeywordEl = document.createElement("h5");
-        searchKeywordEl.textContent = keyword;
-        console.log(keyword);
-
-        // append to the container div
-        searchHistoryEl.appendChild(searchKeywordEl);
-    // }
+    // append to the container div
+    searchHistoryEl.appendChild(searchKeywordEl);
 }
 // add a feature such that if the user hits a certain count of search queries, the button either disables or
 // the div gets a scroll box (so they can have unlimited searches)
+// scrollable div would use "overflow: scroll" in the css
 
-// Saved Recipes
 
-function saveRecipe (saveThis) {
-    
-    var savedRecipesEl = document.querySelector("#saved-recipes");
-    savedRecipesEl.classList = "enter css styling classes here"
-
-    var recipeEl = document.createElement("button");
-    recipeEl.textContent = recipeName;
-
-    // append to the container div
-    savedRecipesEl.appendChild(recipeEl);
-}
-// need to make a save button when you render a recipe
-// need to make a button in saveRecipe() that will render that recipe
 
 
 
