@@ -44,11 +44,8 @@ function runEdamam(keyword) {
         }
 
         $('#recipe-ingredients').append(ingredientsList);
-<<<<<<< HEAD
 
-=======
         
->>>>>>> 21c7a9e376c5542523a0339fcda6e90582a8f37b
         // Saved Recipes
 
         // trying to create an ID for edamam, which doesn't have explicit IDs
@@ -199,7 +196,6 @@ function runEdamam(keyword) {
      runEdamam(keyword);
  };
 
-<<<<<<< HEAD
  $('#recipe-name').on('click', '#prev-btn', function() {
     $('#recipe-name').empty();
     $('#recipe-ingredients').empty();
@@ -209,8 +205,6 @@ function runEdamam(keyword) {
     previousRecipe();
  });
 
-=======
->>>>>>> 21c7a9e376c5542523a0339fcda6e90582a8f37b
 //  Previous Searches
 
 let searchHistoryArray = [];
