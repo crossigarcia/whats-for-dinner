@@ -176,14 +176,4 @@ function searchHistory (keyword) {
 
 
 console.log("search history worked");
-//mealDB api logic:
-// var getMealDB = function () {
-//     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function(response) {
-//     response.json().then(function(data) {
-//     console.log(data);
-//   });
-// });
-// }
 
-// $("#edamam-btn").on("click", runEdamam);
-// $("#mealdb-btn").on("click", getMealDB);
