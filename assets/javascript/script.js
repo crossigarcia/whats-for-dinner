@@ -159,13 +159,43 @@ function searchHistory (keyword) {
     var searchHistoryEl = document.querySelector("#previous-searches");
     searchHistoryEl.classList = "enter css styling classes here"
 
-    var searchKeywordEl = document.createElement("h5");
+    var searchKeywordEl = document.createElement("button");
     searchKeywordEl.textContent = keyword;
     console.log(keyword);
 
     // append to the container div
     searchHistoryEl.appendChild(searchKeywordEl);
-}
+
+    $(searchKeywordEl).on('click', function reloadRecipe(){
+    // runEdamam() but for a specific recipe
+
+    // clear the current contents
+        $('#recipe-name').empty();
+        $('#recipe-img').empty();
+        $('#recipe-ingredients').empty();
+
+        // producing the result again?
+        fetch(`https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`)
+        .then(res => res.json())
+        .then(data => {
+
+            //let recipeHits = data.hits;
+            let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
+            $('#recipe-name').append(recipeName);
+
+            let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
+            $('#recipe-img').append(recipeImg);
+
+            let ingredientsList = $('<ul>').addClass('list');
+            for (let i = 0; i < data.hits[hitsIndex].recipe.ingredientLines.length; i++) {
+                let ingredientItem = $('<li>').addClass('list-item').text(data.hits[hitsIndex].recipe.ingredientLines[i]);
+
+                ingredientsList.append(ingredientItem);
+            }
+            $('#recipe-ingredients').append(ingredientsList);
+    })
+    
+});}
 // add a feature such that if the user hits a certain count of search queries, the button either disables or
 // the div gets a scroll box (so they can have unlimited searches)
 // scrollable div would use "overflow: scroll" in the css
