@@ -48,6 +48,7 @@ function runEdamam(keyword) {
         console.log(`error: ${error}`);
         if (error) {
             // $('#recipe-display').empty();
+            //trigger modal "an error ocurred, please try your search again"
         }
     });
 };
