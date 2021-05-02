@@ -40,29 +40,24 @@ function runEdamam(keyword) {
 
         $('#recipe-ingredients').append(ingredientsList);
 
-        let recipeLink = $('<a>').attr('href', data.hits[hitsIndex].recipe.url).text('Click here for recipe instructions');
+        let recipeLink = $('<a>').attr('href', data.hits[hitsIndex].recipe.url).attr('target', '_blank').text('Click here for recipe instructions');
 
         $('.link').append(recipeLink);
 
         // Saved Recipes
-
-        // trying to create an ID for edamam, which doesn't have explicit IDs
         let recipeID = data.hits[hitsIndex].recipe.label;
-        console.log("your recipe query was = " + recipeID);
-
         let saveRecipeBtn = $('<button>').attr('id', 'save-recipe-btn').text('Save This Recipe');
         
-        recipeName.append(saveRecipeBtn);
+        $('#recipe-name').append(saveRecipeBtn);
 
         $(saveRecipeBtn).on('click', function saveRecipe() {
-            var savedRecipesEl = document.querySelector("#saved-recipes");
+            var savedRecipesEl = $('#saved-recipes');
             savedRecipesEl.classList = "enter css styling classes here";
         
-            var recipeEl = document.createElement("button");
-            recipeEl.textContent = data.hits[hitsIndex].recipe.label;
+            var recipeEl = $('<button>').text(data.hits[hitsIndex].recipe.label);
         
             // append to the container div
-            savedRecipesEl.appendChild(recipeEl);
+            savedRecipesEl.append(recipeEl);
 
             $(recipeEl).on('click', function reloadRecipe(){
                 // runEdamam() but for a specific recipe
