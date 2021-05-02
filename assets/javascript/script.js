@@ -23,7 +23,6 @@ function runEdamam(keyword) {
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
-        //let recipeHits = data.hits;
         let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
         let nextButton = $('<button>').attr('id', 'nxt-btn').text('Next Recipe');
         let previousButton = $('<button>').attr('id', 'prev-btn').text('Previous Recipe');
@@ -48,7 +47,7 @@ function runEdamam(keyword) {
     .catch((error) => {
         console.log(`error: ${error}`);
         if (error) {
-            $('#recipe-display').empty();
+            // $('#recipe-display').empty();
         }
     });
 };
@@ -57,7 +56,13 @@ function runEdamam(keyword) {
     
     let keyword = $('#keyword').val().trim();
     hitsIndex++;
-    runEdamam(keyword);
+
+    if (hitsIndex === 9) {
+        hitsIndex = 0;
+        runEdamam(keyword);
+    } else {
+        runEdamam(keyword);
+    }
      
  };
 
@@ -68,6 +73,7 @@ function runEdamam(keyword) {
     $('.link').empty();
 
     nextRecipe();
+
  });
 
  function previousRecipe() {
