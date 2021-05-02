@@ -1,14 +1,8 @@
-//edamam api logic:
 let hitsIndex = 0;
 
 let mealID = [];
 var listTitle = document.querySelector("#recipe-name");
 var meal_container = document.getElementById('#recipe-steps');
-// let keyword = $('#keyword').val().trim();
-
-// nico's edamam api
-// id = 16faf740
-// key = 7e13ce2d929e6839de8e33e08b528146
 
 $('#keyword-btn').on('click', function() {
     $('#recipe-name').empty();
@@ -33,16 +27,18 @@ function runEdamam(keyword) {
 
         $('#recipe-name').append(recipeName, previousButton, nextButton);
 
-            let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
-            $('#recipe-img').append(recipeImg);
+        let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
+        $('#recipe-img').append(recipeImg);
 
-            let ingredientsList = $('<ul>').addClass('list');
-            for (let i = 0; i < data.hits[hitsIndex].recipe.ingredientLines.length; i++) {
-                let ingredientItem = $('<li>').addClass('list-item').text(data.hits[hitsIndex].recipe.ingredientLines[i]);
+        let ingredientsList = $('<ul>').addClass('list');
+        for (let i = 0; i < data.hits[hitsIndex].recipe.ingredientLines.length; i++) {
+            let ingredientItem = $('<li>').addClass('list-item').text(data.hits[hitsIndex].recipe.ingredientLines[i]);
 
                 ingredientsList.append(ingredientItem);
-            }
-            $('#recipe-ingredients').append(ingredientsList);
+
+        }
+
+        $('#recipe-ingredients').append(ingredientsList);
 
         let recipeLink = $('<a>').attr('href', data.hits[hitsIndex].recipe.url).text('Click here for recipe instructions');
 
