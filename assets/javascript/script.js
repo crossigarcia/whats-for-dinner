@@ -23,11 +23,11 @@ function runEdamam(keyword) {
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
-        //let recipeHits = data.hits;
         let recipeName = $('<h2>').addClass('title').text(data.hits[hitsIndex].recipe.label);
         let nextButton = $('<button>').attr('id', 'nxt-btn').text('Next Recipe');
+        let previousButton = $('<button>').attr('id', 'prev-btn').text('Previous Recipe');
 
-        $('#recipe-name').append(recipeName, nextButton);
+        $('#recipe-name').append(recipeName, previousButton, nextButton);
 
         let recipeImg = $('<img>').attr('src', data.hits[hitsIndex].recipe.image);
         $('#recipe-img').append(recipeImg);
@@ -47,7 +47,8 @@ function runEdamam(keyword) {
     .catch((error) => {
         console.log(`error: ${error}`);
         if (error) {
-            $('#recipe-display').empty();
+            // $('#recipe-display').empty();
+            //trigger modal "an error ocurred, please try your search again"
         }
     });
 };
@@ -55,19 +56,40 @@ function runEdamam(keyword) {
  function nextRecipe() {
     
     let keyword = $('#keyword').val().trim();
-    hitsIndex++
-    runEdamam(keyword);
+    hitsIndex++;
+
+    if (hitsIndex === 9) {
+        hitsIndex = 0;
+        runEdamam(keyword);
+    } else {
+        runEdamam(keyword);
+    }
      
  };
 
- $('#recipe-name').on('click', 'button', function() {
-    console.log(this);
+ $('#recipe-name').on('click', '#nxt-btn', function() {
     $('#recipe-name').empty();
     $('#recipe-ingredients').empty();
     $('#recipe-img').empty();
     $('.link').empty();
 
     nextRecipe();
+
+ });
+
+ function previousRecipe() {
+     let keyword = $('#keyword').val().trim();
+     hitsIndex--;
+     runEdamam(keyword);
+ };
+
+ $('#recipe-name').on('click', '#prev-btn', function() {
+    $('#recipe-name').empty();
+    $('#recipe-ingredients').empty();
+    $('#recipe-img').empty();
+    $('.link').empty();
+
+    previousRecipe();
  });
 
 //  Previous Searches
