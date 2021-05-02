@@ -50,8 +50,8 @@ function runEdamam(keyword) {
         let recipeID = data.hits[hitsIndex].recipe.label;
         console.log("your recipe query was = " + recipeID);
 
-        let saveRecipeBtn = document.createElement("button");
-        saveRecipeBtn.innerHTML = "Save This Recipe";
+        let saveRecipeBtn = $('<button>').attr('id', 'save-recipe-btn').text('Save This Recipe');
+        
         recipeName.append(saveRecipeBtn);
 
         $(saveRecipeBtn).on('click', function saveRecipe() {

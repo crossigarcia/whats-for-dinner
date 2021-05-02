@@ -2,8 +2,96 @@ html, body, main {
     height: 100%;
 }
 
+.title {
+    background-attachment: fixed;
+}
 
+.search-btn {
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+    width: 100%;
+}
 
+#save-recipe-btn {
+    position: absolute;
+    top: 112%;
+    left: 39%;
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+}
 
+#nxt-btn {
+    position: absolute;
+    top: 102%;
+    left: 48%;
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+    }
 
+#prev-btn {
+    position: absolute;
+    top: 102%;
+    left: 32%;
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+}
+
+.link a {
+    position: absolute;
+    top: 92%;
+    left: 32%;
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+}
+
+#nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover {
+    color: #ffffff !important;
+    background: #080808;
+    border-color: #080808 !important;
+    transition: all 0.4s ease 0s;
+    }
+
+img {
+    border: black;
+    border-radius: 6px;
+}
+
+.list {
+    font-weight: bold;
+}
 
