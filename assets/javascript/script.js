@@ -236,6 +236,7 @@ var buttonClickHandler = function () {
 
 
 function displayRecipeOptions(menu) {
+
     let apiUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='+ menu;
 
     fetch(apiUrl)
