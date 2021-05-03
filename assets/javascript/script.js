@@ -228,6 +228,7 @@ function displayRecipeOptions(menu) {
         }  
         
     }
+feature/mealDb-edamam-merge
     for(let x=0; x<ingredients.length; x++){
         let ingredientItem = $('<li>').addClass('list-item').text(ingredients[x]);
         ingredientsList.append(ingredientItem);
@@ -267,4 +268,9 @@ $('#select1 li').click(function() {
       
     getMealDB(value);
   });
- 
+
+
+    })    
+
+};    
+
