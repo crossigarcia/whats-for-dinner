@@ -2,7 +2,7 @@ let hitsIndex = 0;
 
 let mealID = [];
 var listTitle = document.querySelector("#recipe-name");
-var meal_container = document.getElementById('#recipe-steps');
+var meal_container = document.getElementById('#recipe-display');
 
 $('#keyword-btn').on('click', function() {
     $('#recipe-name').empty();
@@ -14,6 +14,20 @@ $('#keyword-btn').on('click', function() {
     runEdamam(keyword);
     searchHistory(keyword);
 });
+
+var select = document.getElementById('select1');
+function logValue() {
+    var result = $(".uk-active").text();
+    console.log(result);
+    getMealDB(result);
+}
+
+function GetSelectedValue(){
+    var e = document.getElementById("country");
+    var result = e.options[e.selectedIndex].value;
+    
+    document.getElementById("result").innerHTML = result;
+}
 
 function runEdamam(keyword) {
     let apiUrl = `https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`;
@@ -177,14 +191,14 @@ function searchHistory (keyword) {
 
 console.log("search history worked");
 //mealDB api logic:
-var getMealDB = function () {
+var getMealDB = function (category) {
     //fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(function (response) {
     // response.json().then(function (data) {
     //    console.log(data);
     //});
     //});
-
-    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian').then(function (response) {
+    console.log('https://www.themealdb.com/api/json/v1/1/filter.php?c='+ category )
+    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+ category).then(function (response) {
         response.json().then(function (menu) {
             //saveMealID(menu);
             for (let j = 0; j < menu.meals.length; j++) {
@@ -209,10 +223,9 @@ var getMealDB = function () {
 }
 
 var buttonClickHandler = function () {
+    $("#recipe-name").empty();
     var menuDetail = event.target.getAttribute("menu-id");
-    console.log(menuDetail);
     if (menuDetail) {
-        $("#recipe-name").empty();
         displayRecipeOptions(menuDetail);
     }
 }
@@ -236,41 +249,40 @@ function displayRecipeOptions(menu) {
             $('#recipe-img').append(recipeImg);
 
             console.log(recipeImg);
-            //console.log(data.meals[0].strMealThumb);
-
-            // Get all ingredients from the object. Up to 20
             
-            // for(let i=1; i<=20; i++) {
-            //     let strIngredient = "strIngredient"+i;
-            //     console.log (strIngredient);  
-            //     //if(data.meals[0].strIngredient != "" || data.meals[0].strIngredient != "null"){
-            //       ingredients.push(data.meals[0].strIngredient)
-            //       console.log(ingredients);
-            //       console.log(data.meals[0].strIngredient1);
-                
-    
-              //}
-
-
-              
-           // }
-
            //const ingredients = [];
     // Get all ingredients from the object. Up to 20
+    let ingredientsList = $('<ul>').addClass('list');
+    var ingredientHeader = document.createElement("h2");
+    ingredientHeader.classList.add("title");
+    ingredientHeader.textContent = "Ingredients";
+    $('#recipe-ingredients').append(ingredientHeader);
      for(let i=1; i<=20; i++) {
         if(data.meals[0][`strIngredient${i}`]) {
         ingredients.push(`${data.meals[0][`strIngredient${i}`]} - ${data.meals[0][`strMeasure${i}`]}`)
-        console.log(ingredients);
         } else {
       // Stop if no more ingredients
          break;
-        }
+        }  
         
     }
-
-    })    
-
-}    
+    for(let x=0; x<ingredients.length; x++){
+        let ingredientItem = $('<li>').addClass('list-item').text(ingredients[x]);
+        ingredientsList.append(ingredientItem);
+        
+    }
+    $('#recipe-ingredients').append(ingredientsList);
+         
+    
+    var recipeHeader = document.createElement("h2");
+    recipeHeader.classList.add("title");
+    recipeHeader.textContent = "Instructions";
+    $('#recipe-ingredients').append(recipeHeader);
+    
+    let instructions = $('<p>').addClass('instr').text(data.meals[0].strInstructions);   
+    $('#recipe-ingredients').append(instructions);
+    }
+ )}
 
 
 //$("menu-btn").on("click", buttonClickHandler);
@@ -278,3 +290,19 @@ function displayRecipeOptions(menu) {
 
 $("#edamam-btn").on("click", runEdamam);
 $("#mealdb-btn").on("click", getMealDB);
+//select.addEventListener('click', 'li', logValue);
+
+$('#select1 li').click(function() {
+    //Get the id of list items
+     $("#recipe-name").empty();
+     $("#recipe-img").empty();
+     $("#ingredients").empty();
+     $("#recipe-header").empty();
+     $("#recipe-ingredients").empty();
+     
+     
+      var value  = $(this).text();
+      
+    getMealDB(value);
+  });
+ 
