@@ -4,16 +4,24 @@ let mealID = [];
 var listTitle = document.querySelector("#recipe-name");
 var meal_container = document.getElementById('#recipe-display');
 
-$('#keyword-btn').on('click', function() {
+let keyword = $('#keyword').val().trim();
+
+function clearBasicRecipeContents () {
     $('#recipe-name').empty();
-    $('#recipe-ingredients').empty();
     $('#recipe-img').empty();
+    $('#recipe-ingredients').empty();
+    $('.link').empty();
+};
+
+$('#keyword-btn').on('click', function() {
+    clearBasicRecipeContents();
 
     let keyword = $('#keyword').val().trim();
 
     runEdamam(keyword);
     searchHistory(keyword);
 });
+
 
 var select = document.getElementById('select1');
 function logValue() {
@@ -73,11 +81,7 @@ function runEdamam(keyword) {
             let recipeID = data.hits[hitsIndex].recipe.label;
 
             $(recipeEl).on('click', function reloadRecipe(){
-                // runEdamam() but for a specific recipe
-                $('#recipe-name').empty();
-                $('#recipe-img').empty();
-                $('#recipe-ingredients').empty();
-
+                clearBasicRecipeContents();
                 runEdamam(recipeID);
             });
         });
@@ -106,10 +110,7 @@ function nextRecipe() {
 };
 
  $('#recipe-name').on('click', '#nxt-btn', function() {
-    $('#recipe-name').empty();
-    $('#recipe-ingredients').empty();
-    $('#recipe-img').empty();
-    $('.link').empty();
+    clearBasicRecipeContents();
 
     nextRecipe();
 
@@ -126,6 +127,8 @@ function nextRecipe() {
     $('#recipe-ingredients').empty();
     $('#recipe-img').empty();
     $('.link').empty();
+    // this should be the same the clearBasicRecipeContents() function I made at the top, but it's not my code
+    // so I am uncomfortable changing it. but replacing it with that function should be work the same, I think
 
     previousRecipe();
  });
@@ -135,22 +138,22 @@ let searchHistoryArray = [];
 function searchHistory (keyword) {
     // send the keyword to a user's local storage
     localStorage.setItem("keyword", keyword);
-    
-    // take the current keyword search term and place it at the beginning of an array
-    // searchHistoryArray.unshift(keyword);
-    // console.log(searchHistoryArray);
+
     var searchHistoryEl = document.querySelector("#previous-searches");
     searchHistoryEl.classList = "enter css styling classes here"
 
-    var searchKeywordEl = document.createElement("h5");
+    var searchKeywordEl = document.createElement("button");
     searchKeywordEl.textContent = keyword;
 
     // append to the container div
     searchHistoryEl.appendChild(searchKeywordEl);
-}
-// add a feature such that if the user hits a certain count of search queries, the button either disables or
-// the div gets a scroll box (so they can have unlimited searches)
-// scrollable div would use "overflow: scroll" in the css
+
+    $(searchKeywordEl).on('click', function reloadRecipe(){
+        clearBasicRecipeContents();
+        runEdamam(keyword);
+    });
+};
+
 
 //mealDB api logic:
 var getMealDB = function (category) {
@@ -181,7 +184,6 @@ var getMealDB = function (category) {
             //displayRecipeOptions(menu);
         });
     });
-
 }
 
 var buttonClickHandler = function () {
@@ -228,7 +230,6 @@ function displayRecipeOptions(menu) {
         }  
         
     }
-feature/mealDb-edamam-merge
     for(let x=0; x<ingredients.length; x++){
         let ingredientItem = $('<li>').addClass('list-item').text(ingredients[x]);
         ingredientsList.append(ingredientItem);
@@ -245,7 +246,7 @@ feature/mealDb-edamam-merge
     let instructions = $('<p>').addClass('instr').text(data.meals[0].strInstructions);   
     $('#recipe-ingredients').append(instructions);
     }
- )}
+ )};
 
 
 //$("menu-btn").on("click", buttonClickHandler);
@@ -267,10 +268,10 @@ $('#select1 li').click(function() {
       var value  = $(this).text();
       
     getMealDB(value);
-  });
+});
 
+// UM i'm not sure why the following lines are here but I don't want to delete them yet just in case??
+//     })    
 
-    })    
-
-};    
+// };    
 
