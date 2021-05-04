@@ -1,9 +1,20 @@
-html, body, main {
+html, body {
     height: 100%;
+    margin: 0;
+
 }
 
-.title {
-    background-attachment: fixed;
+body {
+    background-image: url("../images/uspsidedownspoons.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+.header-name {
+    color: #080808;
+    font-weight: bold;
 }
 
 .criteria-button, .keyword-button, .search-btn {
@@ -32,9 +43,9 @@ html, body, main {
     border-radius: 6px;
 }
 
-#nxt-btn {
+#nxt-btn, #next-btn {
     position: absolute;
-    top: 102%;
+    top: 115%;
     left: 48%;
     color: #494949 !important;
     text-transform: uppercase;
@@ -47,9 +58,9 @@ html, body, main {
     border-radius: 6px;
     }
 
-#prev-btn {
+#prev-btn, #previous-btn {
     position: absolute;
-    top: 102%;
+    top: 115%;
     left: 32%;
     color: #494949 !important;
     text-transform: uppercase;
@@ -77,19 +88,23 @@ html, body, main {
     border-radius: 6px;
 }
 
-#nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover, .criteria-button:hover, .keyword-button:hover {
+#nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover, .criteria-button:hover, .keyword-button:hover, #previous-btn:hover, #next-btn:hover {
     color: #ffffff !important;
     background: #080808;
     border-color: #080808 !important;
     transition: all 0.4s ease 0s;
     }
 
-img {
+#recipe-img, img {
+    max-width: 90%;
+    height: auto;
+    box-sizing: border-box;
     border-style: solid;
     border: 4px solid #494949;
     border-radius: 6px;
 }
 
-.list {
+.list ul {
     font-weight: bold;
+    padding-left: 0px;
 }
