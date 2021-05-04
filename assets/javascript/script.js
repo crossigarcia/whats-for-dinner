@@ -105,7 +105,7 @@ function runEdamam(keyword) {
     .catch((error) => {
       if (error) {
         $("#recipe-display").empty();
-        UIkit.modal.alert("Recipe Not Found! Please try again.");
+        UIkit.modal.alert("Recipe Not Found! Please try a different keyword.");
       }
     });
 }
