@@ -1,12 +1,8 @@
 let hitsIndex = 0;
-let mealID = [];
-var listTitle = document.querySelector("#recipe-name");
+let meals = [];
+var recipeTitle = document.querySelector("#recipe-name");
 var meal_container = document.getElementById("#recipe-display");
-var value1 = 0;
-var menuDetail;
-var newmealID;
-var counter = 0;
-
+var recipeDetail;
 let keyword = $("#keyword").val().trim();
 
 function clearBasicRecipeContents() {
@@ -29,7 +25,6 @@ $("#keyword-btn").on("click", function () {
 var select = document.getElementById("select1");
 function logValue() {
   var result = $(".uk-active").text();
-  console.log(result);
   getMealDB(result);
 }
 
@@ -162,27 +157,22 @@ function searchHistory(keyword) {
 
 //mealDB api logic:
 var getMealDB = function (category) {
-  console.log(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
-  );
   fetch(
     "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
   ).then(function (response) {
     response.json().then(function (menu) {
-      //saveMealID(menu);
+      meals = [];
       for (let j = 0; j < menu.meals.length; j++) {
-        //var menuTitle= document.createElement("h2");
         // save meal id for all items in the search
-        mealID.push(menu.meals[j].idMeal);
+        meals.push(menu.meals[j].idMeal);
         var menuTitle = document.createElement("button");
         menuTitle.className = "menu-btn";
         menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
         menuTitle.innerHTML = menu.meals[j].strMeal;
         var menuIcon = document.createElement("img");
         menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
-        //menuTitle.textContent = menu.meals[j].strMeal;
-        listTitle.appendChild(menuTitle);
-        listTitle.appendChild(menuIcon);
+        recipeTitle.appendChild(menuTitle);
+        recipeTitle.appendChild(menuIcon);
         menuTitle.addEventListener("click", buttonClickHandler);
       }
     });
@@ -191,9 +181,9 @@ var getMealDB = function (category) {
 
 var buttonClickHandler = function () {
   $("#recipe-name").empty();
-  menuDetail = event.target.getAttribute("menu-id");
-  if (menuDetail) {
-    displayRecipeOptions(menuDetail);
+ recipeDetail = event.target.getAttribute("menu-id");
+  if (recipeDetail) {
+    displayRecipeOptions(recipeDetail);
   }
 };
 
@@ -213,11 +203,13 @@ function displayRecipeOptions(menu) {
         .attr("id", "previous-btn")
         .text("Previous Recipe");
 
-      if (counter === mealID.length - 1) {
+      if (menu === meals[(meals.length-1)]){   
         nextButton.prop("disabled", true);
+
       }
-      if (counter === 0) {
-        previousButton.prop("disabled", true);
+      
+      if (menu === meals[0]) {
+          previousButton.prop("disabled", true);
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
@@ -265,11 +257,9 @@ function displayRecipeOptions(menu) {
       videoHeader.classList.add("title");
       videoHeader.textContent = "Video Recipe";
       var test = data.meals[0].strYoutube.slice(-11);
-      console.log(test);
       $("#video").append(videoHeader);
       var iframe = document.createElement("iframe");
       iframe.src = "https://www.youtube.com/embed/" + test;
-      console.log(iframe.src);
       iframe.width = "420";
       iframe.height = "315";
       $("#video").append(iframe);
@@ -277,11 +267,8 @@ function displayRecipeOptions(menu) {
 }
 
 function previousRecipemealDB() {
-  menuDetail = mealID[mealID.indexOf(menuDetail) - 1];
-  counter--;
-  console.log(menuDetail);
-  console.log("new menuDetail within previous function", menuDetail);
-  displayRecipeOptions(menuDetail);
+  recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
+  displayRecipeOptions(recipeDetail);
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
@@ -296,11 +283,8 @@ $("#recipe-name").on("click", "#previous-btn", function () {
 });
 
 function nextRecipemealDB() {
-  menuDetail = mealID[mealID.indexOf(menuDetail) + 1];
-  counter++;
-  console.log(menuDetail);
-  console.log("new menuDetail within next function", menuDetail);
-  displayRecipeOptions(menuDetail);
+recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
+  displayRecipeOptions(recipeDetail);
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
