@@ -46,11 +46,11 @@ function runEdamam(keyword) {
       let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
       if (hitsIndex === 4) {
-        nextButton.prop("disabled", true);
+        nextButton.prop("disabled", true).addClass('disabled');
       }
 
       if (hitsIndex === 0) {
-        previousButton.prop("disabled", true);
+        previousButton.prop("disabled", true).addClass('disabled');
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
