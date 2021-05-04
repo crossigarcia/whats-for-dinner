@@ -13,15 +13,6 @@ function clearBasicRecipeContents() {
   $(".recipe-video").empty();
 }
 
-$("#keyword-btn").on("click", function () {
-  clearBasicRecipeContents();
-
-  let keyword = $("#keyword").val().trim();
-
-  runEdamam(keyword);
-  searchHistory(keyword);
-});
-
 var select = document.getElementById("select1");
 function logValue() {
   var result = $(".uk-active").text();
@@ -35,19 +26,32 @@ function GetSelectedValue() {
   document.getElementById("result").innerHTML = result;
 }
 
+$("#keyword-btn").on("click", function () {
+  clearBasicRecipeContents();
+
+  let keyword = $("#keyword").val().trim();
+
+  runEdamam(keyword);
+  searchHistory(keyword);
+});
+
 function runEdamam(keyword) {
   let apiUrl = `https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`;
 
   fetch(apiUrl)
     .then((res) => res.json())
     .then((data) => {
-      let recipeName = $("<h2>")
-        .addClass("title")
-        .text(data.hits[hitsIndex].recipe.label);
+      let recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
       let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
-      let previousButton = $("<button>")
-        .attr("id", "prev-btn")
-        .text("Previous Recipe");
+      let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
+
+      if (hitsIndex === 4) {
+        nextButton.prop("disabled", true);
+      }
+
+      if (hitsIndex === 0) {
+        previousButton.prop("disabled", true);
+      }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
 
@@ -109,12 +113,7 @@ function runEdamam(keyword) {
 function nextRecipe() {
   let keyword = $("#keyword").val().trim();
   hitsIndex++;
-
-  if (hitsIndex === 3) {
-    runEdamam(keyword);
-  } else {
-    $("#nxt-btn").addClass("uk-button").attr('disabled');
-  }
+  runEdamam(keyword);
 }
 
 $("#recipe-name").on("click", "#nxt-btn", function () {
@@ -181,7 +180,7 @@ var getMealDB = function (category) {
 
 var buttonClickHandler = function () {
   $("#recipe-name").empty();
- recipeDetail = event.target.getAttribute("menu-id");
+  recipeDetail = event.target.getAttribute("menu-id");
   if (recipeDetail) {
     displayRecipeOptions(recipeDetail);
   }
@@ -203,13 +202,12 @@ function displayRecipeOptions(menu) {
         .attr("id", "previous-btn")
         .text("Previous Recipe");
 
-      if (menu === meals[(meals.length-1)]){   
+      if (menu === meals[meals.length - 1]) {
         nextButton.prop("disabled", true);
-
       }
-      
+
       if (menu === meals[0]) {
-          previousButton.prop("disabled", true);
+        previousButton.prop("disabled", true);
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
@@ -283,7 +281,7 @@ $("#recipe-name").on("click", "#previous-btn", function () {
 });
 
 function nextRecipemealDB() {
-recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
+  recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
   displayRecipeOptions(recipeDetail);
 }
 
