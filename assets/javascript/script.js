@@ -58,6 +58,9 @@ function runEdamam(keyword) {
 
       let recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
       $("#recipe-img").append(recipeImg);
+      // copied to compare 
+      // let recipeImg = $("<img>").attr("src", data.meals[0].strMealThumb);
+      // $("#recipe-img").append(recipeImg);
 
       let ingredientsList = $("<ul>").addClass("list");
       for (
@@ -222,8 +225,8 @@ function displayRecipeOptions(menu) {
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
 
-      let recipeImg = $("<img>").attr("src", data.meals[0].strMealThumb);
-      $("#recipe-img").append(recipeImg);
+      let recipeImage = $("<img>").attr("src", data.meals[0].strMealThumb);
+      $("#recipe-img").append(recipeImage);
       // Get all ingredients from the object. Up to 20
       let ingredientsList = $("<ul>").addClass("list");
       var ingredientHeader = document.createElement("h2");

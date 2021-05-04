@@ -17,10 +17,6 @@ body {
     font-weight: bold;
 }
 
-.title {
-    background-attachment: fixed;
-}
-
 .criteria-button, .keyword-button, .search-btn {
     background: #ffffff;
     padding: 15px;
@@ -49,7 +45,7 @@ body {
 
 #nxt-btn, #next-btn {
     position: absolute;
-    top: 102%;
+    top: 115%;
     left: 48%;
     color: #494949 !important;
     text-transform: uppercase;
@@ -64,7 +60,7 @@ body {
 
 #prev-btn, #previous-btn {
     position: absolute;
-    top: 102%;
+    top: 115%;
     left: 32%;
     color: #494949 !important;
     text-transform: uppercase;
@@ -99,7 +95,7 @@ body {
     transition: all 0.4s ease 0s;
     }
 
-img, #recipe-img {
+#recipe-img, img {
     max-width: 90%;
     height: auto;
     box-sizing: border-box;
