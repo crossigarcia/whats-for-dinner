@@ -203,11 +203,11 @@ function displayRecipeOptions(menu) {
         .text("Previous Recipe");
 
       if (menu === meals[meals.length - 1]) {
-        nextButton.prop("disabled", true);
+        nextButton.prop("disabled", true).addClass("disabled");
       }
 
       if (menu === meals[0]) {
-        previousButton.prop("disabled", true);
+        previousButton.prop("disabled", true).addClass("disabled");
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
