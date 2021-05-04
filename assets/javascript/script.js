@@ -14,6 +14,7 @@ function clearBasicRecipeContents() {
   $("#recipe-img").empty();
   $("#recipe-ingredients").empty();
   $(".link").empty();
+  $(".recipe-video").empty();
 }
 
 $("#keyword-btn").on("click", function () {
@@ -114,11 +115,10 @@ function nextRecipe() {
   let keyword = $("#keyword").val().trim();
   hitsIndex++;
 
-  if (hitsIndex === 5) {
-    hitsIndex = 0;
+  if (hitsIndex === 3) {
     runEdamam(keyword);
   } else {
-    runEdamam(keyword);
+    $("#nxt-btn").addClass("uk-button").attr('disabled');
   }
 }
 
@@ -135,14 +135,7 @@ function previousRecipe() {
 }
 
 $("#recipe-name").on("click", "#prev-btn", function () {
-  $("#recipe-name").empty();
-  $("#recipe-ingredients").empty();
-  $("#recipe-img").empty();
-  $(".link").empty();
-  // this should be the same the clearBasicRecipeContents() function I made at the top, but
-  // I am uncomfortable changing it. but replacing it with that function should be work the
-  // same, I think
-
+  clearBasicRecipeContents();
   previousRecipe();
 });
 
@@ -319,9 +312,6 @@ $("#recipe-name").on("click", "#next-btn", function () {
   $("#video").empty();
   nextRecipemealDB();
 });
-
-$("#edamam-btn").on("click", runEdamam);
-$("#mealdb-btn").on("click", getMealDB);
 
 $("#select1 li").click(function () {
   //Get the id of list items
