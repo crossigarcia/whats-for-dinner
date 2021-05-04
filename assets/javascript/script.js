@@ -3,6 +3,11 @@ let hitsIndex = 0;
 let mealID = [];
 var listTitle = document.querySelector("#recipe-name");
 var meal_container = document.getElementById('#recipe-display');
+var value1 = 0;
+var menuDetail;
+var newmealID;
+var counter = 0;
+
 
 let keyword = $('#keyword').val().trim();
 
@@ -149,6 +154,7 @@ function searchHistory (keyword) {
     // append to the container div
     searchHistoryEl.appendChild(searchKeywordEl);
 
+
     $(searchKeywordEl).on('click', function reloadRecipe(){
         clearBasicRecipeContents();
         runEdamam(keyword);
@@ -156,14 +162,10 @@ function searchHistory (keyword) {
 };
 
 
+
 //mealDB api logic:
 var getMealDB = function (category) {
-    //fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(function (response) {
-    // response.json().then(function (data) {
-    //    console.log(data);
-    //});
-    //});
-    var mealID=[];
+    
     console.log('https://www.themealdb.com/api/json/v1/1/filter.php?c='+ category )
     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+ category).then(function (response) {
         response.json().then(function (menu) {
@@ -172,7 +174,6 @@ var getMealDB = function (category) {
                 //var menuTitle= document.createElement("h2");
                 // save meal id for all items in the search
                 mealID.push(menu.meals[j].idMeal);
-                console.log(mealID);
                 var menuTitle = document.createElement('button');
                 menuTitle.className = "menu-btn";
                 menuTitle.setAttribute("menu-id", menu.meals[j].idMeal)
@@ -184,21 +185,20 @@ var getMealDB = function (category) {
                 listTitle.appendChild(menuIcon);
                 menuTitle.addEventListener("click", buttonClickHandler);
             }
-            //displayRecipeOptions(menu);
         });
     });
 }
 
 var buttonClickHandler = function () {
     $("#recipe-name").empty();
-    var menuDetail = event.target.getAttribute("menu-id");
+   menuDetail = event.target.getAttribute("menu-id");
     if (menuDetail) {
         displayRecipeOptions(menuDetail);
     }
 }
 
-
 function displayRecipeOptions(menu) {
+
     let apiUrl = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='+ menu;
 
     fetch(apiUrl)
@@ -206,14 +206,21 @@ function displayRecipeOptions(menu) {
         .then(data => {
             const ingredients = [];
 
-            let recipeName = $('<h2>').addClass('title').text(data.meals[0].strMeal);
-            //let nextButton = $('<button>').attr('id', 'nxt-btn').text('Next Recipe');
-            $('#recipe-name').append(recipeName);
+
+            let recipeName = $('<h2 id="meal-id" data-mealid="'+menu+ '">').addClass('title').text(data.meals[0].strMeal);
+            let nextButton = $('<button>').attr('id', 'next-btn').text('Next Recipe');
+            let previousButton = $('<button>').attr('id', 'previous-btn').text('Previous Recipe');
+            if(counter === ((mealID.length)-1)){
+                 nextButton.prop("disabled",true);
+            }
+            if(counter === 0){
+                 previousButton.prop("disabled",true);
+            }
+
+            $('#recipe-name').append(recipeName, previousButton, nextButton);
+
             let recipeImg = $('<img>').attr('src', data.meals[0].strMealThumb);
             $('#recipe-img').append(recipeImg);
-            console.log(recipeImg);
-            
-            //const ingredients = [];
             // Get all ingredients from the object. Up to 20
             let ingredientsList = $('<ul>').addClass('list');
             var ingredientHeader = document.createElement("h2");
@@ -229,6 +236,7 @@ function displayRecipeOptions(menu) {
             }  
         
             }
+
 // there's a loose } somewhere between 223-231
 
         for(let x=0; x<ingredients.length; x++){
@@ -241,6 +249,7 @@ function displayRecipeOptions(menu) {
     recipeHeader.classList.add("title");
     recipeHeader.textContent = "Instructions";
     $('#recipe-ingredients').append(recipeHeader);
+
     
     let instructions = $('<p>').addClass('instr').text(data.meals[0].strInstructions);   
     $('#recipe-ingredients').append(instructions);
@@ -262,15 +271,65 @@ function displayRecipeOptions(menu) {
  )};
 
 
-//$("menu-btn").on("click", buttonClickHandler);
+            var videoHeader = document.createElement("h2");
+            videoHeader.classList.add("title");
+            videoHeader.textContent = "Video Recipe";
+            var test = data.meals[0].strYoutube.slice(-11);
+            $('#video').append(videoHeader);
+            var iframe = document.createElement('iframe');
+            iframe.src = "https://www.youtube.com/embed/"+ test;
+            iframe.width = '420';
+            iframe.height = '315';
+            $('#video').append(iframe);               
+ })
+}
+
+function previousRecipemealDB() {
+    menuDetail=mealID[(mealID.indexOf(menuDetail))-1]
+    counter --;
+    console.log(menuDetail);
+    console.log("new menuDetail within previous function", menuDetail);
+    displayRecipeOptions(menuDetail);
+};
+
+$('#recipe-name').on('click', '#previous-btn', function() {
+    $("#recipe-name").empty();
+     $("#recipe-img").empty();
+     $("#ingredients").empty();
+     $("#recipe-header").empty();
+     $("#recipe-ingredients").empty();
+     $("#video").empty();
+
+     previousRecipemealDB();;
+ });
+  
+ function nextRecipemealDB() {
+        menuDetail=mealID[(mealID.indexOf(menuDetail))+1]
+        counter ++;
+        console.log(menuDetail);
+        console.log("new menuDetail within next function", menuDetail);
+        displayRecipeOptions(menuDetail);        
+    };
+
+ $ ('#recipe-name').on('click', '#next-btn', function() {
+    $("#recipe-name").empty();
+     $("#recipe-img").empty();
+     $("#ingredients").empty();
+     $("#recipe-header").empty();
+     $("#recipe-ingredients").empty();
+     $("#video").empty();
+     nextRecipemealDB();
+
+ });
 
 
 $("#edamam-btn").on("click", runEdamam);
 $("#mealdb-btn").on("click", getMealDB);
-//select.addEventListener('click', 'li', logValue);
+
 
 $('#select1 li').click(function() {
     //Get the id of list items
+
     $("#recipe-name").empty();
     $("#recipe-img").empty();
     $("#ingredients").empty();
@@ -282,9 +341,6 @@ $('#select1 li').click(function() {
       
     getMealDB(value);
 });
+  
 
-// UM i'm not sure why the following lines are here but I don't want to delete them yet just in case??
-//     })    
-
-// };    
 
