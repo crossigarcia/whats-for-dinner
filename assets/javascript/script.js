@@ -19,19 +19,10 @@ function logValue() {
     getMealDB(result);
 }
 
-function GetSelectedValue() {
-    var e = document.getElementById("country");
-    var result = e.options[e.selectedIndex].value;
-
-    document.getElementById("result").innerHTML = result;
-}
-
 $("#keyword-btn").on("click", function () {
     clearBasicRecipeContents();
 
-
     let keyword = $("#keyword").val().trim();
-
 
     runEdamam(keyword);
     searchHistory(keyword);
@@ -97,11 +88,11 @@ function runEdamam(keyword) {
             $("#recipe-name").append(saveRecipeBtn);
 
             $(saveRecipeBtn).on("click", function saveRecipe() {
-                $("#saved-recipes").addClass("");
+                $(".saved-recipes").addClass("");
 
                 let recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
                 // append to the container div
-                $("#saved-recipes").append(recipeEl);
+                $(".saved-recipes").append(recipeEl);
 
                 let recipeID = data.hits[hitsIndex].recipe.label;
 
@@ -115,7 +106,7 @@ function runEdamam(keyword) {
             if (error) {
                 $("#recipe-display").empty();
                 UIkit.modal.alert("Recipe Not Found! Please try a different keyword.");
-            }
+            };
         });
 }
 
@@ -285,11 +276,11 @@ function displayRecipeOptions(menu) {
         
 
         $(saveRecipeBtn).on("click", function saveRecipe() {
-            $("#saved-recipes").addClass("");
+            $(".saved-recipes").addClass("");
 
             let recipeEl = $("<button>").text(data.meals[0].strMeal);
             // append to the container div
-            $("#saved-recipes").append(recipeEl);
+            $(".saved-recipes").append(recipeEl);
 
             let recipeID = data.meals[0].idMeal;
 
