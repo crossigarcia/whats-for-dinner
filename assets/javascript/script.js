@@ -1,9 +1,8 @@
 let hitsIndex = 0;
 let meals = [];
-var recipeTitle = document.querySelector("#recipe-name");
-var meal_container = document.getElementById("#recipe-display");
-var recipeDetail;
-let keyword = $("#keyword").val().trim();
+let recipeTitle = document.querySelector("#recipe-name");
+let meal_container = document.getElementById("#recipe-display");
+let recipeDetail;
 
 function clearBasicRecipeContents() {
   $("#recipe-name").empty();
@@ -13,15 +12,15 @@ function clearBasicRecipeContents() {
   $(".recipe-video").empty();
 }
 
-var select = document.getElementById("select1");
+let select = document.getElementById("select1");
 function logValue() {
-  var result = $(".uk-active").text();
+  let result = $(".uk-active").text();
   getMealDB(result);
 }
 
 function GetSelectedValue() {
-  var e = document.getElementById("country");
-  var result = e.options[e.selectedIndex].value;
+  let e = document.getElementById("country");
+  let result = e.options[e.selectedIndex].value;
 
   document.getElementById("result").innerHTML = result;
 }
@@ -57,9 +56,6 @@ function runEdamam(keyword) {
 
       let recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
       $("#recipe-img").append(recipeImg);
-      // copied to compare 
-      // let recipeImg = $("<img>").attr("src", data.meals[0].strMealThumb);
-      // $("#recipe-img").append(recipeImg);
 
       let ingredientsList = $("<ul>").addClass("list");
       for (
@@ -107,6 +103,7 @@ function runEdamam(keyword) {
     })
     .catch((error) => {
       if (error) {
+        console.log(error);
         $("#recipe-display").empty();
         UIkit.modal.alert("Recipe Not Found! Please try a different keyword.");
       }
@@ -142,10 +139,10 @@ function searchHistory(keyword) {
   // send the keyword to a user's local storage
   localStorage.setItem("keyword", keyword);
 
-  var searchHistoryEl = document.querySelector("#previous-searches");
+  let searchHistoryEl = document.querySelector("#previous-searches");
   searchHistoryEl.classList = "enter css styling classes here";
 
-  var searchKeywordEl = document.createElement("button");
+  let searchKeywordEl = document.createElement("button");
   searchKeywordEl.textContent = keyword;
 
   // append to the container div
@@ -158,7 +155,7 @@ function searchHistory(keyword) {
 }
 
 //mealDB api logic:
-var getMealDB = function (category) {
+let getMealDB = function (category) {
   fetch(
     "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
   ).then(function (response) {
@@ -167,11 +164,11 @@ var getMealDB = function (category) {
       for (let j = 0; j < menu.meals.length; j++) {
         // save meal id for all items in the search
         meals.push(menu.meals[j].idMeal);
-        var menuTitle = document.createElement("button");
+        let menuTitle = document.createElement("button");
         menuTitle.className = "menu-btn";
         menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
         menuTitle.innerHTML = menu.meals[j].strMeal;
-        var menuIcon = document.createElement("img");
+        let menuIcon = document.createElement("img");
         menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
         recipeTitle.appendChild(menuTitle);
         recipeTitle.appendChild(menuIcon);
@@ -181,7 +178,7 @@ var getMealDB = function (category) {
   });
 };
 
-var buttonClickHandler = function () {
+let buttonClickHandler = function () {
   $("#recipe-name").empty();
   recipeDetail = event.target.getAttribute("menu-id");
   if (recipeDetail) {
@@ -219,7 +216,7 @@ function displayRecipeOptions(menu) {
       $("#recipe-img").append(recipeImage);
       // Get all ingredients from the object. Up to 20
       let ingredientsList = $("<ul>").addClass("list");
-      var ingredientHeader = document.createElement("h2");
+      let ingredientHeader = document.createElement("h2");
       ingredientHeader.classList.add("title");
       ingredientHeader.textContent = "Ingredients";
       $("#recipe-ingredients").append(ingredientHeader);
@@ -243,7 +240,7 @@ function displayRecipeOptions(menu) {
         ingredientsList.append(ingredientItem);
       }
       $("#recipe-ingredients").append(ingredientsList);
-      var recipeHeader = document.createElement("h2");
+      let recipeHeader = document.createElement("h2");
       recipeHeader.classList.add("title");
       recipeHeader.textContent = "Instructions";
       $("#recipe-ingredients").append(recipeHeader);
@@ -254,12 +251,12 @@ function displayRecipeOptions(menu) {
       $("#recipe-ingredients").append(instructions);
 
       // added 249-260 from Chitra's
-      var videoHeader = document.createElement("h2");
+      let videoHeader = document.createElement("h2");
       videoHeader.classList.add("title");
       videoHeader.textContent = "Video Recipe";
-      var test = data.meals[0].strYoutube.slice(-11);
+      let test = data.meals[0].strYoutube.slice(-11);
       $("#video").append(videoHeader);
-      var iframe = document.createElement("iframe");
+      let iframe = document.createElement("iframe");
       iframe.src = "https://www.youtube.com/embed/" + test;
       iframe.width = "420";
       iframe.height = "315";
@@ -273,13 +270,7 @@ function previousRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
-  $("#recipe-name").empty();
-  $("#recipe-img").empty();
-  $("#ingredients").empty();
-  $("#recipe-header").empty();
-  $("#recipe-ingredients").empty();
-  $("#video").empty();
-
+  clearBasicRecipeContents();
   previousRecipemealDB();
 });
 
@@ -289,26 +280,16 @@ function nextRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
-  $("#recipe-name").empty();
-  $("#recipe-img").empty();
-  $("#ingredients").empty();
-  $("#recipe-header").empty();
-  $("#recipe-ingredients").empty();
-  $("#video").empty();
+  clearBasicRecipeContents();
   nextRecipemealDB();
 });
 
 $("#select1 li").click(function () {
   //Get the id of list items
 
-  $("#recipe-name").empty();
-  $("#recipe-img").empty();
-  $("#ingredients").empty();
-  $("#recipe-header").empty();
-  $("#recipe-ingredients").empty();
-  $("#video").empty();
+  clearBasicRecipeContents();
 
-  var value = $(this).text();
+  let value = $(this).text();
 
   getMealDB(value);
 });
