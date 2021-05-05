@@ -1,9 +1,10 @@
-var hitsIndex = 0;
-var meals = [];
-var recipeTitle = document.querySelector("#recipe-name");
-var meal_container = document.getElementById("#recipe-display");
-var recipeDetail;
-var keyword = $("#keyword").val().trim();
+
+let hitsIndex = 0;
+let meals = [];
+let recipeTitle = document.querySelector("#recipe-name");
+let meal_container = document.getElementById("#recipe-display");
+let recipeDetail;
+
 
 function clearBasicRecipeContents() {
     $("#recipe-name").empty();
@@ -11,12 +12,16 @@ function clearBasicRecipeContents() {
     $("#recipe-ingredients").empty();
     $(".link").empty();
     $(".recipe-video").empty();
+    $("#ingredients").empty();
+    $("#recipe-header").empty();
+    $("#video").empty();
 }
 
 var select = document.getElementById("select1");
 function logValue() {
     var result = $(".uk-active").text();
     getMealDB(result);
+
 }
 
 $("#keyword-btn").on("click", function () {
@@ -137,11 +142,12 @@ function searchHistory(keyword) {
     // send the keyword to a user's local storage
     localStorage.setItem("keyword", keyword);
 
-    var searchHistoryEl = document.querySelector("#previous-searches");
-    searchHistoryEl.classList = "enter css styling classes here";
+  let searchHistoryEl = document.querySelector("#previous-searches");
+  searchHistoryEl.classList = "enter css styling classes here";
 
-    var searchKeywordEl = document.createElement("button");
-    searchKeywordEl.textContent = keyword;
+  let searchKeywordEl = document.createElement("button");
+  searchKeywordEl.textContent = keyword;
+
 
     // append to the container div
     searchHistoryEl.appendChild(searchKeywordEl);
@@ -153,38 +159,38 @@ function searchHistory(keyword) {
 }
 
 //mealDB api logic:
-var getMealDB = function (category) {
-    fetch(
-        "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
-    ).then(function (response) {
-        response.json().then(function (menu) {
-            meals = [];
-            for (var j = 0; j < menu.meals.length; j++) {
-                // save meal id for all items in the search
-                meals.push(menu.meals[j].idMeal);
-                var menuTitle = document.createElement("button");
-                menuTitle.className = "menu-btn";
-                menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
-                menuTitle.innerHTML = menu.meals[j].strMeal;
-                var menuIcon = document.createElement("img");
-                menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
-                recipeTitle.appendChild(menuTitle);
-                recipeTitle.appendChild(menuIcon);
-                menuTitle.addEventListener("click", buttonClickHandler);
-            }
-        });
+let getMealDB = function (category) {
+  fetch(
+    "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
+  ).then(function (response) {
+    response.json().then(function (menu) {
+      meals = [];
+      for (let j = 0; j < menu.meals.length; j++) {
+        // save meal id for all items in the search
+        meals.push(menu.meals[j].idMeal);
+        let menuTitle = document.createElement("button");
+        menuTitle.className = "menu-btn";
+        menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
+        menuTitle.innerHTML = menu.meals[j].strMeal;
+        let menuIcon = document.createElement("img");
+        menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
+        recipeTitle.appendChild(menuTitle);
+        recipeTitle.appendChild(menuIcon);
+        menuTitle.addEventListener("click", buttonClickHandler);
+      }
     });
 };
 
-var buttonClickHandler = function () {
-    $("#recipe-name").empty();
-    recipeDetail = event.target.getAttribute("menu-id");
-    if (recipeDetail) {
-        displayRecipeOptions(recipeDetail);
-    }
+let buttonClickHandler = function () {
+  $("#recipe-name").empty();
+  recipeDetail = event.target.getAttribute("menu-id");
+  if (recipeDetail) {
+    displayRecipeOptions(recipeDetail);
+  }
 };
 
 function displayRecipeOptions(menu) {
+
     var apiUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + menu;
 
     fetch(apiUrl)
@@ -271,7 +277,6 @@ function displayRecipeOptions(menu) {
             iframe.width = "420";
             iframe.height = "315";
             $("#video").append(iframe);
-        
 
         $(saveRecipeBtn).on("click", function saveRecipe() {
             $(".saved-recipes").addClass("");
@@ -296,9 +301,10 @@ function previousRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
-    clearBasicRecipeContents();
 
-    previousRecipemealDB();
+  clearBasicRecipeContents();
+  previousRecipemealDB();
+
 });
 
 function nextRecipemealDB() {
@@ -307,17 +313,14 @@ function nextRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
-    clearBasicRecipeContents();
-    nextRecipemealDB();
+  clearBasicRecipeContents();
+  nextRecipemealDB();
 });
 
 
 $("#select1 li").click(function () {
     //Get the id of list items
-
-    clearBasicRecipeContents();
-
-    var value = $(this).text();
-
+  clearBasicRecipeContents();
+  let value = $(this).text();
     getMealDB(value);
 });
