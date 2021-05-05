@@ -97,11 +97,11 @@ function runEdamam(keyword) {
             $("#recipe-name").append(saveRecipeBtn);
 
             $(saveRecipeBtn).on("click", function saveRecipe() {
-                $("#saved-recipes").addClass("");
+                $(".saved-recipes").addClass("");
 
                 let recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
                 // append to the container div
-                $("#saved-recipes").append(recipeEl);
+                $(".saved-recipes").append(recipeEl);
 
                 let recipeID = data.hits[hitsIndex].recipe.label;
 
@@ -285,11 +285,11 @@ function displayRecipeOptions(menu) {
         
 
         $(saveRecipeBtn).on("click", function saveRecipe() {
-            $("#saved-recipes").addClass("");
+            $(".saved-recipes").addClass("");
 
             let recipeEl = $("<button>").text(data.meals[0].strMeal);
             // append to the container div
-            $("#saved-recipes").append(recipeEl);
+            $(".saved-recipes").append(recipeEl);
 
             let recipeID = data.meals[0].idMeal;
 
@@ -307,12 +307,7 @@ function previousRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
-    $("#recipe-name").empty();
-    $("#recipe-img").empty();
-    $("#ingredients").empty();
-    $("#recipe-header").empty();
-    $("#recipe-ingredients").empty();
-    $("#video").empty();
+    clearBasicRecipeContents();
 
     previousRecipemealDB();
 });
@@ -323,12 +318,7 @@ function nextRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
-    $("#recipe-name").empty();
-    $("#recipe-img").empty();
-    $("#ingredients").empty();
-    $("#recipe-header").empty();
-    $("#recipe-ingredients").empty();
-    $("#video").empty();
+    clearBasicRecipeContents();
     nextRecipemealDB();
 });
 
@@ -336,12 +326,7 @@ $("#recipe-name").on("click", "#next-btn", function () {
 $("#select1 li").click(function () {
     //Get the id of list items
 
-    $("#recipe-name").empty();
-    $("#recipe-img").empty();
-    $("#ingredients").empty();
-    $("#recipe-header").empty();
-    $("#recipe-ingredients").empty();
-    $("#video").empty();
+    clearBasicRecipeContents();
 
     var value = $(this).text();
 
