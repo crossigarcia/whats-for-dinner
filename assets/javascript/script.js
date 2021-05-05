@@ -5,126 +5,137 @@ let meal_container = document.getElementById("#recipe-display");
 let recipeDetail;
 
 function clearBasicRecipeContents() {
-  $("#recipe-name").empty();
-  $("#recipe-img").empty();
-  $("#recipe-ingredients").empty();
-  $(".link").empty();
-  $(".recipe-video").empty();
+    $("#recipe-name").empty();
+    $("#recipe-img").empty();
+    $("#recipe-ingredients").empty();
+    $(".link").empty();
+    $(".recipe-video").empty();
+    $("#ingredients").empty();
+    $("#recipe-header").empty();
+    $("#video").empty();
 }
 
 $("#keyword-btn").on("click", function () {
-  clearBasicRecipeContents();
+    clearBasicRecipeContents();
 
-  let keyword = $("#keyword").val().trim();
 
-  runEdamam(keyword);
-  searchHistory(keyword);
+    let keyword = $("#keyword").val().trim();
+
+
+    runEdamam(keyword);
+    searchHistory(keyword);
 });
 
 function runEdamam(keyword) {
-  let apiUrl = `https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`;
 
-  fetch(apiUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      let recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
-      let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
-      let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
+    let apiUrl = `https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`;
 
-      if (hitsIndex === 4) {
-        nextButton.prop("disabled", true).addClass('disabled');
-      }
+    fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+            let recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
+            let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
+            let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
-      if (hitsIndex === 0) {
-        previousButton.prop("disabled", true).addClass('disabled');
-      }
+            if (hitsIndex === 4) {
+              // this is the attribute that disables the button
+                // nextButton.prop("disabled", true).addClass('disabled');
+              $(nextButton).attr('disabled', 'disabled');
+            }
 
-      $("#recipe-name").append(recipeName, previousButton, nextButton);
+            if (hitsIndex === 0) {
+                // previousButton.prop("disabled", true).addClass('disabled');
+                $(previousButton).attr('disabled', 'disabled');
+            }
 
-      let recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
-      $("#recipe-img").append(recipeImg);
+            $("#recipe-name").append(recipeName, previousButton, nextButton);
 
-      let ingredientsList = $("<ul>").addClass("list");
-      for (
-        let i = 0;
-        i < data.hits[hitsIndex].recipe.ingredientLines.length;
-        i++
-      ) {
-        let ingredientItem = $("<li>")
-          .addClass("list-item")
-          .text(data.hits[hitsIndex].recipe.ingredientLines[i]);
+            let recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
+            $("#recipe-img").append(recipeImg);
+            // copied to compare 
+            // let recipeImg = $("<img>").attr("src", data.meals[0].strMealThumb);
+            // $("#recipe-img").append(recipeImg);
 
-        ingredientsList.append(ingredientItem);
-      }
+            let ingredientsList = $("<ul>").addClass("list");
+            for (
+                let i = 0;
+                i < data.hits[hitsIndex].recipe.ingredientLines.length;
+                i++
+            ) {
+                let ingredientItem = $("<li>")
+                    .addClass("list-item")
+                    .text(data.hits[hitsIndex].recipe.ingredientLines[i]);
 
-      $("#recipe-ingredients").append(ingredientsList);
+                ingredientsList.append(ingredientItem);
+            }
 
-      let recipeLink = $("<a>")
-        .attr("href", data.hits[hitsIndex].recipe.url)
-        .attr("target", "_blank")
-        .text("Click here for recipe instructions");
+            $("#recipe-ingredients").append(ingredientsList);
 
-      $(".link").append(recipeLink);
+            let recipeLink = $("<a>")
+                .attr("href", data.hits[hitsIndex].recipe.url)
+                .attr("target", "_blank")
+                .text("Click here for recipe instructions");
 
-      // Saved Recipes
-      let saveRecipeBtn = $("<button>")
-        .attr("id", "save-recipe-btn")
-        .text("Save This Recipe");
+            $(".link").append(recipeLink);
 
-      $("#recipe-name").append(saveRecipeBtn);
+            // Saved Recipes
+            let saveRecipeBtn = $("<button>")
+                .attr("id", "save-recipe-btn")
+                .text("Save This Recipe");
 
-      $(saveRecipeBtn).on("click", function saveRecipe() {
-        $("#saved-recipes").addClass("");
+            $("#recipe-name").append(saveRecipeBtn);
 
-        let recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
-        // append to the container div
-        $("#saved-recipes").append(recipeEl);
+            $(saveRecipeBtn).on("click", function saveRecipe() {
+                $("#saved-recipes").addClass("");
 
-        let recipeID = data.hits[hitsIndex].recipe.label;
+                let recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
+                // append to the container div
+                $("#saved-recipes").append(recipeEl);
 
-        $(recipeEl).on("click", function reloadRecipe() {
-          clearBasicRecipeContents();
-          runEdamam(recipeID);
+                let recipeID = data.hits[hitsIndex].recipe.label;
+
+                $(recipeEl).on("click", function reloadRecipe() {
+                    clearBasicRecipeContents();
+                    runEdamam(recipeID);
+                });
+            });
+        })
+        .catch((error) => {
+            if (error) {
+                $("#recipe-display").empty();
+                UIkit.modal.alert("Recipe Not Found! Please try a different keyword.");
+            }
         });
-      });
-    })
-    .catch((error) => {
-      if (error) {
-        console.log(error);
-        $("#recipe-display").empty();
-        UIkit.modal.alert("Recipe Not Found! Please try a different keyword.");
-      }
-    });
 }
 
 function nextRecipe() {
-  let keyword = $("#keyword").val().trim();
-  hitsIndex++;
-  runEdamam(keyword);
+    let keyword = $("#keyword").val().trim();
+    hitsIndex++;
+    runEdamam(keyword);
 }
 
 $("#recipe-name").on("click", "#nxt-btn", function () {
-  clearBasicRecipeContents();
+    clearBasicRecipeContents();
 
-  nextRecipe();
+    nextRecipe();
 });
 
 function previousRecipe() {
-  let keyword = $("#keyword").val().trim();
-  hitsIndex--;
-  runEdamam(keyword);
+    let keyword = $("#keyword").val().trim();
+    hitsIndex--;
+    runEdamam(keyword);
 }
 
 $("#recipe-name").on("click", "#prev-btn", function () {
-  clearBasicRecipeContents();
-  previousRecipe();
+    clearBasicRecipeContents();
+    previousRecipe();
 });
 
 //  Previous Searches
 let searchHistoryArray = [];
 function searchHistory(keyword) {
-  // send the keyword to a user's local storage
-  localStorage.setItem("keyword", keyword);
+    // send the keyword to a user's local storage
+    localStorage.setItem("keyword", keyword);
 
   let searchHistoryEl = document.querySelector("#previous-searches");
   searchHistoryEl.classList = "enter css styling classes here";
@@ -132,16 +143,18 @@ function searchHistory(keyword) {
   let searchKeywordEl = document.createElement("button");
   searchKeywordEl.textContent = keyword;
 
-  // append to the container div
-  searchHistoryEl.appendChild(searchKeywordEl);
 
-  $(searchKeywordEl).on("click", function reloadRecipe() {
-    clearBasicRecipeContents();
-    runEdamam(keyword);
-  });
+    // append to the container div
+    searchHistoryEl.appendChild(searchKeywordEl);
+
+    $(searchKeywordEl).on("click", function reloadRecipe() {
+        clearBasicRecipeContents();
+        runEdamam(keyword);
+    });
 }
 
 //mealDB api logic:
+
 let getMealDB = function (category) {
   fetch(
     "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
@@ -162,7 +175,6 @@ let getMealDB = function (category) {
         menuTitle.addEventListener("click", buttonClickHandler);
       }
     });
-  });
 };
 
 let buttonClickHandler = function () {
@@ -248,35 +260,55 @@ function displayRecipeOptions(menu) {
       iframe.width = "420";
       iframe.height = "315";
       $("#video").append(iframe);
+
+        $(saveRecipeBtn).on("click", function saveRecipe() {
+            $("#saved-recipes").addClass("");
+
+            let recipeEl = $("<button>").text(data.meals[0].strMeal);
+            // append to the container div
+            $("#saved-recipes").append(recipeEl);
+
+            let recipeID = data.meals[0].idMeal;
+
+            $(recipeEl).on("click", function reloadRecipe() {
+            clearBasicRecipeContents();
+            displayRecipeOptions(recipeID);
+            });
+        });
     });
 }
 
 function previousRecipemealDB() {
-  recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
-  displayRecipeOptions(recipeDetail);
+    recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
+    displayRecipeOptions(recipeDetail);
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
+
   clearBasicRecipeContents();
   previousRecipemealDB();
+
 });
 
 function nextRecipemealDB() {
-  recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
-  displayRecipeOptions(recipeDetail);
+    recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
+    displayRecipeOptions(recipeDetail);
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
+
   clearBasicRecipeContents();
   nextRecipemealDB();
+
 });
 
+
 $("#select1 li").click(function () {
-  //Get the id of list items
+    //Get the id of list items
 
   clearBasicRecipeContents();
 
   let value = $(this).text();
 
-  getMealDB(value);
+    getMealDB(value);
 });
