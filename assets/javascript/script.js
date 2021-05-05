@@ -15,7 +15,7 @@ function clearBasicRecipeContents() {
 
 var select = document.getElementById("select1");
 function logValue() {
-    var result = $(".uk-active").text();
+    var result = $(".criteria-item").text();
     getMealDB(result);
 }
 
