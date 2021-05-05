@@ -4,21 +4,61 @@ html, body {
 
 }
 
-body {
-    background-image: url("../images/uspsidedownspoons.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+.bg {
+    min-height: 100%;
+  min-width: 1024px;
+	
+  width: 100%;
+  height: auto;
+	
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+ 
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
 
 }
 
 .header-name {
-    color: #080808;
+    color: white;
     font-weight: bold;
+    background-color: whitesmoke;
+    background: repeating-linear-gradient(85deg, black, transparent 100px);
+    border-radius: 5%;
+    
 }
 
-.criteria-button, .keyword-button, .search-btn {
+.keyword-button {
     background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+    width: 80%;
+    
+    top: 87%;
+}
+
+.criteria-button {
+    background: #ffffff;
+    padding: 15px;
+    border: 4px solid #494949 !important;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+    width: 80%;
+}
+
+.search-btn {
+      background: #ffffff;
     padding: 15px;
     border: 4px solid #494949 !important;
     text-transform: uppercase;
@@ -29,7 +69,7 @@ body {
 }
 
 #save-recipe-btn {
-    position: absolute;
+    position:absolute;
     top: 112%;
     left: 39%;
     color: #494949 !important;
@@ -44,9 +84,8 @@ body {
 }
 
 #nxt-btn, #next-btn {
-    position: absolute;
-    top: 115%;
-    left: 48%;
+    position: relative;
+    left: 0%;
     color: #494949 !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -59,9 +98,8 @@ body {
     }
 
 #prev-btn, #previous-btn {
-    position: absolute;
-    top: 115%;
-    left: 32%;
+    position: relative;
+    left: 0%;
     color: #494949 !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -75,8 +113,8 @@ body {
 
 .link a {
     position: absolute;
-    top: 92%;
-    left: 32%;
+    top: 103%;
+    left: 33%;
     color: #494949 !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -98,6 +136,8 @@ body {
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
+    position:sticky;
+    top: 145%;
 }
 
 #nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover, .criteria-button:hover, .keyword-button:hover, #previous-btn:hover, #next-btn:hover, .saved-searches-cont:hover {
@@ -107,14 +147,48 @@ body {
     transition: all 0.4s ease 0s;
     }
 
-img {
-    width: 104px;
+img, img {
+    position: relative;
+    width: 300px;
     border-style: solid;
     border: 4px solid #494949;
     border-radius: 6px;
 }
 
-.list ul {
+.list {
+    position: relative;
     font-weight: bold;
     padding-left: 0px;
+    color: black;
+    background: lightgrey;
+    border-radius: 15px;
+    border: 4px solid #494949;
 }
+
+.recipe-video {
+    position: relative;
+}
+
+p {
+    position: relative;
+    font-weight: bold;
+    padding-left: 0px;
+    color: black;
+    background: lightgrey;
+    border-radius: 15px;
+    border: 4px solid #494949;
+    right: 144%;
+}
+
+.title {
+    position: relative;
+    font-weight: bold;
+    background: lightgrey;
+    border-radius: 15px;
+    border: 4px solid #494949;
+    width: 44%;
+}
+
+
+
+

@@ -19,7 +19,7 @@ function clearBasicRecipeContents() {
 
 var select = document.getElementById("select1");
 function logValue() {
-    var result = $(".uk-active").text();
+    var result = $(".search-criteria").text();
     getMealDB(result);
 
 }
@@ -91,7 +91,7 @@ function runEdamam(keyword) {
             $("#recipe-name").append(saveRecipeBtn);
 
             $(saveRecipeBtn).on("click", function saveRecipe() {
-                $(".saved-recipes").addClass("");
+                $(".saved-recipes").addClass("uk-button uk-button-text");
 
                 var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
                 // append to the container div
