@@ -143,7 +143,7 @@ function searchHistory(keyword) {
     localStorage.setItem("keyword", keyword);
 
     let searchHistoryEl = document.querySelector("#previous-searches");
-    searchHistoryEl.classList = "enter css styling classes here";
+    searchHistoryEl.classList = "";
 
     let searchKeywordEl = document.createElement("button");
     searchKeywordEl.textContent = keyword;

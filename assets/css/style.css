@@ -83,7 +83,7 @@ html, body {
     border-radius: 6px;
 }
 
-#nxt-btn, #next-btn {
+#nxt-btn, #next-btn, #prev-btn, #previous-btn {
     position: relative;
     left: 0%;
     color: #494949 !important;
@@ -96,20 +96,6 @@ html, body {
     transition: all 0.4s ease 0s;
     border-radius: 6px;
     }
-
-#prev-btn, #previous-btn {
-    position: relative;
-    left: 0%;
-    color: #494949 !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #ffffff;
-    padding: 15px;
-    border: 4px solid #494949 !important;
-    display: inline-block;
-    transition: all 0.4s ease 0s;
-    border-radius: 6px;
-}
 
 .link a {
     position: absolute;
@@ -189,6 +175,6 @@ p {
     width: 44%;
 }
 
-
-
-
+#previous-searches {
+    
+}
