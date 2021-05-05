@@ -29,13 +29,16 @@ function GetSelectedValue() {
 $("#keyword-btn").on("click", function () {
     clearBasicRecipeContents();
 
+
     let keyword = $("#keyword").val().trim();
+
 
     runEdamam(keyword);
     searchHistory(keyword);
 });
 
 function runEdamam(keyword) {
+
     let apiUrl = `https://api.edamam.com/search?q=${keyword}&app_id=f97b44b8&app_key=0ab78a3d00b18729a51ba6b69ee857d0`;
 
     fetch(apiUrl)
