@@ -49,11 +49,14 @@ function runEdamam(keyword) {
             let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
             if (hitsIndex === 4) {
-                nextButton.prop("disabled", true).addClass('disabled');
+              // this is the attribute that disables the button
+                // nextButton.prop("disabled", true).addClass('disabled');
+              $(nextButton).attr('disabled', 'disabled');
             }
 
             if (hitsIndex === 0) {
-                previousButton.prop("disabled", true).addClass('disabled');
+                // previousButton.prop("disabled", true).addClass('disabled');
+                $(previousButton).attr('disabled', 'disabled');
             }
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
@@ -214,11 +217,13 @@ function displayRecipeOptions(menu) {
             $("#recipe-name").append(saveRecipeBtn);
             //disable next button if we have reached end of array  
             if (menu === meals[meals.length - 1]) {
-                nextButton.prop("disabled", true).addClass("disabled");
+                // nextButton.prop("disabled", true).addClass("disabled");
+                $(nextButton).attr('disabled', 'disabled');
             }
             //disable previous button if we have reached beginning of array
             if (menu === meals[0]) {
-                previousButton.prop("disabled", true).addClass("disabled");
+                // previousButton.prop("disabled", true).addClass("disabled");
+                $(previousButton).attr('disabled', 'disabled');
             }
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
