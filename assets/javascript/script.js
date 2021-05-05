@@ -38,9 +38,9 @@ function runEdamam(keyword) {
             let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
             if (hitsIndex === 4) {
-              // this is the attribute that disables the button
+                // this is the attribute that disables the button
                 // nextButton.prop("disabled", true).addClass('disabled');
-              $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled');
             }
 
             if (hitsIndex === 0) {
@@ -137,11 +137,11 @@ function searchHistory(keyword) {
     // send the keyword to a user's local storage
     localStorage.setItem("keyword", keyword);
 
-  let searchHistoryEl = document.querySelector("#previous-searches");
-  searchHistoryEl.classList = "enter css styling classes here";
+    let searchHistoryEl = document.querySelector("#previous-searches");
+    searchHistoryEl.classList = "enter css styling classes here";
 
-  let searchKeywordEl = document.createElement("button");
-  searchKeywordEl.textContent = keyword;
+    let searchKeywordEl = document.createElement("button");
+    searchKeywordEl.textContent = keyword;
 
 
     // append to the container div
@@ -156,159 +156,162 @@ function searchHistory(keyword) {
 //mealDB api logic:
 
 let getMealDB = function (category) {
-  fetch(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
-  ).then(function (response) {
-    response.json().then(function (menu) {
-      meals = [];
-      for (let j = 0; j < menu.meals.length; j++) {
-        // save meal id for all items in the search
-        meals.push(menu.meals[j].idMeal);
-        let menuTitle = document.createElement("button");
-        menuTitle.className = "menu-btn";
-        menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
-        menuTitle.innerHTML = menu.meals[j].strMeal;
-        let menuIcon = document.createElement("img");
-        menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
-        recipeTitle.appendChild(menuTitle);
-        recipeTitle.appendChild(menuIcon);
-        menuTitle.addEventListener("click", buttonClickHandler);
-      }
-    });
-};
-
-let buttonClickHandler = function () {
-  $("#recipe-name").empty();
-  recipeDetail = event.target.getAttribute("menu-id");
-  if (recipeDetail) {
-    displayRecipeOptions(recipeDetail);
-  }
-};
-
-function displayRecipeOptions(menu) {
-  let apiUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + menu;
-
-  fetch(apiUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      const ingredients = [];
-
-      let recipeName = $('<h2 id="meal-id" data-mealid="' + menu + '">')
-        .addClass("title")
-        .text(data.meals[0].strMeal);
-      let nextButton = $("<button>").attr("id", "next-btn").text("Next Recipe");
-      let previousButton = $("<button>")
-        .attr("id", "previous-btn")
-        .text("Previous Recipe");
-
-      if (menu === meals[meals.length - 1]) {
-        nextButton.prop("disabled", true).addClass("disabled");
-      }
-
-      if (menu === meals[0]) {
-        previousButton.prop("disabled", true).addClass("disabled");
-      }
-
-      $("#recipe-name").append(recipeName, previousButton, nextButton);
-
-      let recipeImage = $("<img>").attr("src", data.meals[0].strMealThumb);
-      $("#recipe-img").append(recipeImage);
-      // Get all ingredients from the object. Up to 20
-      let ingredientsList = $("<ul>").addClass("list");
-      let ingredientHeader = document.createElement("h2");
-      ingredientHeader.classList.add("title");
-      ingredientHeader.textContent = "Ingredients";
-      $("#recipe-ingredients").append(ingredientHeader);
-      for (let i = 1; i <= 20; i++) {
-        if (data.meals[0][`strIngredient${i}`]) {
-          ingredients.push(
-            `${data.meals[0][`strIngredient${i}`]} - ${
-              data.meals[0][`strMeasure${i}`]
-            }`
-          );
-        } else {
-          // Stop if no more ingredients
-          break;
-        }
-      }
-
-      for (let x = 0; x < ingredients.length; x++) {
-        let ingredientItem = $("<li>")
-          .addClass("list-item")
-          .text(ingredients[x]);
-        ingredientsList.append(ingredientItem);
-      }
-      $("#recipe-ingredients").append(ingredientsList);
-      let recipeHeader = document.createElement("h2");
-      recipeHeader.classList.add("title");
-      recipeHeader.textContent = "Instructions";
-      $("#recipe-ingredients").append(recipeHeader);
-
-      let instructions = $("<p>")
-        .addClass("instr")
-        .text(data.meals[0].strInstructions);
-      $("#recipe-ingredients").append(instructions);
-
-      // added 249-260 from Chitra's
-      let videoHeader = document.createElement("h2");
-      videoHeader.classList.add("title");
-      videoHeader.textContent = "Video Recipe";
-      let test = data.meals[0].strYoutube.slice(-11);
-      $("#video").append(videoHeader);
-      let iframe = document.createElement("iframe");
-      iframe.src = "https://www.youtube.com/embed/" + test;
-      iframe.width = "420";
-      iframe.height = "315";
-      $("#video").append(iframe);
-
-        $(saveRecipeBtn).on("click", function saveRecipe() {
-            $("#saved-recipes").addClass("");
-
-            let recipeEl = $("<button>").text(data.meals[0].strMeal);
-            // append to the container div
-            $("#saved-recipes").append(recipeEl);
-
-            let recipeID = data.meals[0].idMeal;
-
-            $(recipeEl).on("click", function reloadRecipe() {
-            clearBasicRecipeContents();
-            displayRecipeOptions(recipeID);
-            });
+    fetch(
+        "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
+    ).then(function (response) {
+        response.json().then(function (menu) {
+            meals = [];
+            for (let j = 0; j < menu.meals.length; j++) {
+                // save meal id for all items in the search
+                meals.push(menu.meals[j].idMeal);
+                let menuTitle = document.createElement("button");
+                menuTitle.className = "menu-btn";
+                menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
+                menuTitle.innerHTML = menu.meals[j].strMeal;
+                let menuIcon = document.createElement("img");
+                menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
+                recipeTitle.appendChild(menuTitle);
+                recipeTitle.appendChild(menuIcon);
+                menuTitle.addEventListener("click", buttonClickHandler);
+            }
         });
     });
+
 }
 
-function previousRecipemealDB() {
-    recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
-    displayRecipeOptions(recipeDetail);
-}
+    let buttonClickHandler = function () {
+        $("#recipe-name").empty();
+        recipeDetail = event.target.getAttribute("menu-id");
+        if (recipeDetail) {
+            displayRecipeOptions(recipeDetail);
+        }
+    };
 
-$("#recipe-name").on("click", "#previous-btn", function () {
+    function displayRecipeOptions(menu) {
+        let apiUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + menu;
 
-  clearBasicRecipeContents();
-  previousRecipemealDB();
+        fetch(apiUrl)
+            .then((res) => res.json())
+            .then((data) => {
+                const ingredients = [];
 
-});
+                let recipeName = $('<h2 id="meal-id" data-mealid="' + menu + '">')
+                    .addClass("title")
+                    .text(data.meals[0].strMeal);
+                let nextButton = $("<button>").attr("id", "next-btn").text("Next Recipe");
+                let previousButton = $("<button>")
+                    .attr("id", "previous-btn")
+                    .text("Previous Recipe");
 
-function nextRecipemealDB() {
-    recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
-    displayRecipeOptions(recipeDetail);
-}
+                if (menu === meals[meals.length - 1]) {
+                    nextButton.prop("disabled", true).addClass("disabled");
+                }
 
-$("#recipe-name").on("click", "#next-btn", function () {
+                if (menu === meals[0]) {
+                    previousButton.prop("disabled", true).addClass("disabled");
+                }
 
-  clearBasicRecipeContents();
-  nextRecipemealDB();
+                $("#recipe-name").append(recipeName, previousButton, nextButton);
 
-});
+                let recipeImage = $("<img>").attr("src", data.meals[0].strMealThumb);
+                $("#recipe-img").append(recipeImage);
+                // Get all ingredients from the object. Up to 20
+                let ingredientsList = $("<ul>").addClass("list");
+                let ingredientHeader = document.createElement("h2");
+                ingredientHeader.classList.add("title");
+                ingredientHeader.textContent = "Ingredients";
+                $("#recipe-ingredients").append(ingredientHeader);
+                for (let i = 1; i <= 20; i++) {
+                    if (data.meals[0][`strIngredient${i}`]) {
+                        ingredients.push(
+                            `${data.meals[0][`strIngredient${i}`]} - ${
+                            data.meals[0][`strMeasure${i}`]
+                            }`
+                        );
+                    } else {
+                        // Stop if no more ingredients
+                        break;
+                    }
+                }
+
+                for (let x = 0; x < ingredients.length; x++) {
+                    let ingredientItem = $("<li>")
+                        .addClass("list-item")
+                        .text(ingredients[x]);
+                    ingredientsList.append(ingredientItem);
+                }
+                $("#recipe-ingredients").append(ingredientsList);
+                let recipeHeader = document.createElement("h2");
+                recipeHeader.classList.add("title");
+                recipeHeader.textContent = "Instructions";
+                $("#recipe-ingredients").append(recipeHeader);
+
+                let instructions = $("<p>")
+                    .addClass("instr")
+                    .text(data.meals[0].strInstructions);
+                $("#recipe-ingredients").append(instructions);
+
+                // added 249-260 from Chitra's
+                let videoHeader = document.createElement("h2");
+                videoHeader.classList.add("title");
+                videoHeader.textContent = "Video Recipe";
+                let test = data.meals[0].strYoutube.slice(-11);
+                $("#video").append(videoHeader);
+                let iframe = document.createElement("iframe");
+                iframe.src = "https://www.youtube.com/embed/" + test;
+                iframe.width = "420";
+                iframe.height = "315";
+                $("#video").append(iframe);
+
+                $(saveRecipeBtn).on("click", function saveRecipe() {
+                    $("#saved-recipes").addClass("");
+
+                    let recipeEl = $("<button>").text(data.meals[0].strMeal);
+                    // append to the container div
+                    $("#saved-recipes").append(recipeEl);
+
+                    let recipeID = data.meals[0].idMeal;
+
+                    $(recipeEl).on("click", function reloadRecipe() {
+                        clearBasicRecipeContents();
+                        displayRecipeOptions(recipeID);
+                    });
+                });
+            });
+    }
+
+    function previousRecipemealDB() {
+        recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
+        displayRecipeOptions(recipeDetail);
+    }
+
+    $("#recipe-name").on("click", "#previous-btn", function () {
+
+        clearBasicRecipeContents();
+        previousRecipemealDB();
+
+    });
+
+    function nextRecipemealDB() {
+        recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
+        displayRecipeOptions(recipeDetail);
+    }
+
+    $("#recipe-name").on("click", "#next-btn", function () {
+
+        clearBasicRecipeContents();
+        nextRecipemealDB();
+
+    });
 
 
-$("#select1 li").click(function () {
-    //Get the id of list items
+    $("#select1 li").click(function () {
+        //Get the id of list items
 
-  clearBasicRecipeContents();
+        clearBasicRecipeContents();
 
-  let value = $(this).text();
+        var value = $(this).text();
 
-    getMealDB(value);
-});
+        getMealDB(value);
+    })
+
