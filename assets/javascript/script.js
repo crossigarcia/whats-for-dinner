@@ -29,7 +29,7 @@ function GetSelectedValue() {
 $("#keyword-btn").on("click", function () {
   clearBasicRecipeContents();
 
-  let keyword = $("#keyword").val().trim();
+  var keyword = $("#keyword").val().trim();
 
   runEdamam(keyword);
   searchHistory(keyword);
@@ -45,12 +45,16 @@ function runEdamam(keyword) {
       let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
       let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
-      if (hitsIndex === 4) {
-        nextButton.prop("disabled", true).addClass('disabled');
+      if (hitsIndex === 8) {
+        // nextButton.prop("disabled", true).addClass('disabled');
+        $(nextButton).attr('disabled', 'disabled');
+        
       }
 
       if (hitsIndex === 0) {
-        previousButton.prop("disabled", true).addClass('disabled');
+        // previousButton.prop("disabled", true).addClass('disabled');
+        $(previousButton).attr('disabled', 'disabled')
+      
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
@@ -206,11 +210,14 @@ function displayRecipeOptions(menu) {
         .text("Previous Recipe");
 
       if (menu === meals[meals.length - 1]) {
-        nextButton.prop("disabled", true).addClass("disabled");
+        // nextButton.prop("disabled", true).addClass("disabled");
+        $(nextButton).attr('disabled', 'disabled');
+
       }
 
       if (menu === meals[0]) {
         previousButton.prop("disabled", true).addClass("disabled");
+        $(previousButton).attr('disabled', 'disabled')
       }
 
       $("#recipe-name").append(recipeName, previousButton, nextButton);
