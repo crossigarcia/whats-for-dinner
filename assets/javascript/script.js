@@ -46,6 +46,8 @@ function runEdamam(keyword) {
       let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
       if (hitsIndex === 8) {
+
+        // disabled the button without css
         // nextButton.prop("disabled", true).addClass('disabled');
         $(nextButton).attr('disabled', 'disabled');
         
