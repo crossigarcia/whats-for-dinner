@@ -3,7 +3,7 @@ let hitsIndex = 0;
 let meals = [];
 let recipeTitle = document.querySelector("#recipe-name");
 let meal_container = document.getElementById("#recipe-display");
-let recipeDetail;
+let recipeDetail = 0;
 
 
 function clearBasicRecipeContents() {
@@ -45,9 +45,9 @@ function runEdamam(keyword) {
             var previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
             if (hitsIndex === 4) {
-              // this is the attribute that disables the button
+                // this is the attribute that disables the button
                 // nextButton.prop("disabled", true).addClass('disabled');
-              $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled');
             }
 
             if (hitsIndex === 0) {
@@ -142,11 +142,11 @@ function searchHistory(keyword) {
     // send the keyword to a user's local storage
     localStorage.setItem("keyword", keyword);
 
-  let searchHistoryEl = document.querySelector("#previous-searches");
-  searchHistoryEl.classList = "enter css styling classes here";
+    let searchHistoryEl = document.querySelector("#previous-searches");
+    searchHistoryEl.classList = "enter css styling classes here";
 
-  let searchKeywordEl = document.createElement("button");
-  searchKeywordEl.textContent = keyword;
+    let searchKeywordEl = document.createElement("button");
+    searchKeywordEl.textContent = keyword;
 
 
     // append to the container div
@@ -160,34 +160,20 @@ function searchHistory(keyword) {
 
 //mealDB api logic:
 let getMealDB = function (category) {
-  fetch(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
-  ).then(function (response) {
-    response.json().then(function (menu) {
-      meals = [];
-      for (let j = 0; j < menu.meals.length; j++) {
-        // save meal id for all items in the search
-        meals.push(menu.meals[j].idMeal);
-        let menuTitle = document.createElement("button");
-        menuTitle.className = "menu-btn";
-        menuTitle.setAttribute("menu-id", menu.meals[j].idMeal);
-        menuTitle.innerHTML = menu.meals[j].strMeal;
-        let menuIcon = document.createElement("img");
-        menuIcon.setAttribute("src", menu.meals[j].strMealThumb);
-        recipeTitle.appendChild(menuTitle);
-        recipeTitle.appendChild(menuIcon);
-        menuTitle.addEventListener("click", buttonClickHandler);
-      }
+    fetch(
+        "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category
+    ).then(function (response) {
+        response.json().then(function (menu) {
+            meals = [];
+            for (let j = 0; j < menu.meals.length; j++) {
+                // save meal id for all items in the search
+                meals.push(menu.meals[j].idMeal);
+            }
+            displayRecipeOptions(meals[0]);
+            
+        });
     });
-};
-
-let buttonClickHandler = function () {
-  $("#recipe-name").empty();
-  recipeDetail = event.target.getAttribute("menu-id");
-  if (recipeDetail) {
-    displayRecipeOptions(recipeDetail);
-  }
-};
+}
 
 function displayRecipeOptions(menu) {
 
@@ -278,21 +264,21 @@ function displayRecipeOptions(menu) {
             iframe.height = "315";
             $("#video").append(iframe);
 
-        $(saveRecipeBtn).on("click", function saveRecipe() {
-            $(".saved-recipes").addClass("");
+            $(saveRecipeBtn).on("click", function saveRecipe() {
+                $(".saved-recipes").addClass("");
 
-            var recipeEl = $("<button>").text(data.meals[0].strMeal);
-            // append to the container div
-            $(".saved-recipes").append(recipeEl);
+                var recipeEl = $("<button>").text(data.meals[0].strMeal);
+                // append to the container div
+                $(".saved-recipes").append(recipeEl);
 
-            var recipeID = data.meals[0].idMeal;
+                var recipeID = data.meals[0].idMeal;
 
-            $(recipeEl).on("click", function reloadRecipe() {
-            clearBasicRecipeContents();
-            displayRecipeOptions(recipeID);
+                $(recipeEl).on("click", function reloadRecipe() {
+                    clearBasicRecipeContents();
+                    displayRecipeOptions(recipeID);
+                });
             });
         });
-    });
 }
 
 function previousRecipemealDB() {
@@ -302,8 +288,8 @@ function previousRecipemealDB() {
 
 $("#recipe-name").on("click", "#previous-btn", function () {
 
-  clearBasicRecipeContents();
-  previousRecipemealDB();
+    clearBasicRecipeContents();
+    previousRecipemealDB();
 
 });
 
@@ -313,14 +299,14 @@ function nextRecipemealDB() {
 }
 
 $("#recipe-name").on("click", "#next-btn", function () {
-  clearBasicRecipeContents();
-  nextRecipemealDB();
+    clearBasicRecipeContents();
+    nextRecipemealDB();
 });
 
 
 $("#select1 li").click(function () {
     //Get the id of list items
-  clearBasicRecipeContents();
-  let value = $(this).text();
+    clearBasicRecipeContents();
+    let value = $(this).text();
     getMealDB(value);
 });
