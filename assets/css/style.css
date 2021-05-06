@@ -177,6 +177,15 @@ p {
     width: 44%;
 }
 
-#previous-searches {
+/* #previous-searches 
     
+} */
+
+.saved-recipe {
+    position: relative;
+    font-weight: bold;
+    background: black;
+    color: white;
+    border-radius: 15px;
+    border: 4px solid black;
 }
