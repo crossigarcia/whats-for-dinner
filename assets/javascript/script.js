@@ -91,9 +91,9 @@ function runEdamam(keyword) {
             $("#recipe-name").append(saveRecipeBtn);
 
             $(saveRecipeBtn).on("click", function saveRecipe() {
-                $(".saved-recipes").addClass("uk-button uk-button-text");
+                $(".saved-recipes").addClass("");
 
-                var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
+                var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label).addClass("saved-recipe");
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 
@@ -137,26 +137,26 @@ $("#recipe-name").on("click", "#prev-btn", function () {
 });
 
 //  Previous Searches
-var searchHistoryArray = [];
-function searchHistory(keyword) {
-    // send the keyword to a user's local storage
-    localStorage.setItem("keyword", keyword);
+// var searchHistoryArray = [];
+// function searchHistory(keyword) {
+//     // send the keyword to a user's local storage
+//     localStorage.setItem("keyword", keyword);
 
-    let searchHistoryEl = document.querySelector("#previous-searches");
-    searchHistoryEl.classList = "enter css styling classes here";
+//     let searchHistoryEl = document.querySelector("#previous-searches");
+//     searchHistoryEl.classList = "";
 
-    let searchKeywordEl = document.createElement("button");
-    searchKeywordEl.textContent = keyword;
+//     let searchKeywordEl = document.createElement("button");
+//     searchKeywordEl.textContent = keyword;
 
 
-    // append to the container div
-    searchHistoryEl.appendChild(searchKeywordEl);
+//     // append to the container div
+//     searchHistoryEl.appendChild(searchKeywordEl);
 
-    $(searchKeywordEl).on("click", function reloadRecipe() {
-        clearBasicRecipeContents();
-        runEdamam(keyword);
-    });
-}
+//     $(searchKeywordEl).on("click", function reloadRecipe() {
+//         clearBasicRecipeContents();
+//         runEdamam(keyword);
+//     });
+// }
 
 //mealDB api logic:
 let getMealDB = function (category) {

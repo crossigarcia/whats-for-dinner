@@ -34,22 +34,23 @@ html, body {
 }
 
 .keyword-button {
-    background: #ffffff;
+    background: black;
+    color: white;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     text-transform: uppercase;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
     width: 80%;
-    
     top: 87%;
 }
 
 .criteria-button {
-    background: #ffffff;
+    background: black;
+    color: white;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     text-transform: uppercase;
     display: inline-block;
     transition: all 0.4s ease 0s;
@@ -58,9 +59,10 @@ html, body {
 }
 
 .search-btn {
-      background: #ffffff;
+    background: black;
+    color: white;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid white !important;
     text-transform: uppercase;
     display: inline-block;
     transition: all 0.4s ease 0s;
@@ -72,67 +74,53 @@ html, body {
     position:absolute;
     top: 112%;
     left: 39%;
-    color: #494949 !important;
+    color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #ffffff;
+    background: black;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
 }
 
-#nxt-btn, #next-btn {
+#nxt-btn, #next-btn, #prev-btn, #previous-btn {
     position: relative;
     left: 0%;
-    color: #494949 !important;
+    color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #ffffff;
+    background: black;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
     }
 
-#prev-btn, #previous-btn {
-    position: relative;
-    left: 0%;
-    color: #494949 !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #ffffff;
-    padding: 15px;
-    border: 4px solid #494949 !important;
-    display: inline-block;
-    transition: all 0.4s ease 0s;
-    border-radius: 6px;
-}
-
 .link a {
     position: absolute;
     top: 103%;
     left: 33%;
-    color: #494949 !important;
+    color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #ffffff;
+    background: black;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
 }
 
 .saved-searches-cont {
-    color: #494949 !important;
+    color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #ffffff;
+    background: black;
     padding: 15px;
-    border: 4px solid #494949 !important;
+    border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
@@ -142,8 +130,8 @@ html, body {
 
 #nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover, .criteria-button:hover, .keyword-button:hover, #previous-btn:hover, #next-btn:hover, .saved-searches-cont:hover {
     color: #ffffff !important;
-    background: #080808;
-    border-color: #080808 !important;
+    background: rgb(141, 140, 140);
+    border-color: rgb(141, 140, 140) !important;
     transition: all 0.4s ease 0s;
     }
 
@@ -163,6 +151,7 @@ img, img {
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
+    right: 20%;
 }
 
 .recipe-video {
@@ -177,7 +166,8 @@ p {
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 144%;
+    right: 92%;
+    width: 183%;
 }
 
 .title {
@@ -189,6 +179,15 @@ p {
     width: 44%;
 }
 
+/* #previous-searches 
+    
+} */
 
-
-
+.saved-recipe {
+    position: relative;
+    font-weight: bold;
+    background: black;
+    color: white;
+    border-radius: 15px;
+    border: 4px solid black;
+}
