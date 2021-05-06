@@ -151,6 +151,7 @@ img, img {
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
+    right: 20%;
 }
 
 .recipe-video {
@@ -165,7 +166,7 @@ p {
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 144%;
+    right: 42%;
 }
 
 .title {
