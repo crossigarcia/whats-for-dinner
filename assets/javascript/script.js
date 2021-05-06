@@ -3,7 +3,7 @@ let hitsIndex = 0;
 let meals = [];
 let recipeTitle = document.querySelector("#recipe-name");
 let meal_container = document.getElementById("#recipe-display");
-let recipeDetail = 0;
+let recipeDetailIndex = 0;
 
 
 function clearBasicRecipeContents() {
@@ -19,7 +19,7 @@ function clearBasicRecipeContents() {
 
 var select = document.getElementById("select1");
 function logValue() {
-    var result = $(".uk-active").text();
+    var result = $(".search-criteria").text();
     getMealDB(result);
 
 }
@@ -90,10 +90,10 @@ function runEdamam(keyword) {
 
             $("#recipe-name").append(saveRecipeBtn);
 
-            $(saveRecipeBtn).on("click", function saveRecipe() {
+            $("#save-recipe-btn").on("click", function () {
                 $(".saved-recipes").addClass("");
 
-                var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label);
+                var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label).addClass("saved-recipe");
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 
@@ -137,26 +137,26 @@ $("#recipe-name").on("click", "#prev-btn", function () {
 });
 
 //  Previous Searches
-var searchHistoryArray = [];
-function searchHistory(keyword) {
-    // send the keyword to a user's local storage
-    localStorage.setItem("keyword", keyword);
+// var searchHistoryArray = [];
+// function searchHistory(keyword) {
+//     // send the keyword to a user's local storage
+//     localStorage.setItem("keyword", keyword);
 
-    let searchHistoryEl = document.querySelector("#previous-searches");
-    searchHistoryEl.classList = "enter css styling classes here";
+//     let searchHistoryEl = document.querySelector("#previous-searches");
+//     searchHistoryEl.classList = "";
 
-    let searchKeywordEl = document.createElement("button");
-    searchKeywordEl.textContent = keyword;
+//     let searchKeywordEl = document.createElement("button");
+//     searchKeywordEl.textContent = keyword;
 
 
-    // append to the container div
-    searchHistoryEl.appendChild(searchKeywordEl);
+//     // append to the container div
+//     searchHistoryEl.appendChild(searchKeywordEl);
 
-    $(searchKeywordEl).on("click", function reloadRecipe() {
-        clearBasicRecipeContents();
-        runEdamam(keyword);
-    });
-}
+//     $(searchKeywordEl).on("click", function reloadRecipe() {
+//         clearBasicRecipeContents();
+//         runEdamam(keyword);
+//     });
+// }
 
 //mealDB api logic:
 let getMealDB = function (category) {
@@ -213,13 +213,11 @@ function displayRecipeOptions(menu) {
             $("#recipe-img").append(recipeImage);
             // Get all ingredients from the object. Up to 20
             var ingredientsList = $("<ul>").addClass("list");
-            var ingredientHeader = document.createElement("h2");
-            ingredientHeader.classList.add("title");
-            ingredientHeader.textContent = "Ingredients";
+            let ingredientHeader = $("h2").addClass("title").text("Ingredients");
             $("#recipe-ingredients").append(ingredientHeader);
 
             //get all the ingredients from the API
-            for (var i = 1; i <= 20; i++) {
+            for (let i = 1; i <= 20; i++) {
                 if (data.meals[0][`strIngredient${i}`]) {
                     ingredients.push(
                         `${data.meals[0][`strIngredient${i}`]} - ${
@@ -232,7 +230,7 @@ function displayRecipeOptions(menu) {
                 }
             }
 
-            for (var x = 0; x < ingredients.length; x++) {
+            for (let x = 0; x < ingredients.length; x++) {
                 var ingredientItem = $("<li>")
                     .addClass("list-item")
                     .text(ingredients[x]);
@@ -241,9 +239,7 @@ function displayRecipeOptions(menu) {
 
             //create title for ingredient and display all ingredients
             $("#recipe-ingredients").append(ingredientsList);
-            var recipeHeader = document.createElement("h2");
-            recipeHeader.classList.add("title");
-            recipeHeader.textContent = "Instructions";
+            let recipeHeader = $("h2").addClass("title").text("Instructions");
             $("#recipe-ingredients").append(recipeHeader);
 
             //get recipe instruction from API and display it
@@ -253,9 +249,7 @@ function displayRecipeOptions(menu) {
             $("#recipe-ingredients").append(instructions);
 
             //get the video URL and display it
-            var videoHeader = document.createElement("h2");
-            videoHeader.classList.add("title");
-            videoHeader.textContent = "Video Recipe";
+            let videoHeader = $("h2").addClass("title").text("Video Recipe");
             var test = data.meals[0].strYoutube.slice(-11);
             $("#video").append(videoHeader);
             var iframe = document.createElement("iframe");
@@ -264,14 +258,14 @@ function displayRecipeOptions(menu) {
             iframe.height = "315";
             $("#video").append(iframe);
 
-            $(saveRecipeBtn).on("click", function saveRecipe() {
+            $("#save-recipe-btn").on("click", function () {
                 $(".saved-recipes").addClass("");
 
-                var recipeEl = $("<button>").text(data.meals[0].strMeal);
+                let recipeEl = $("<button>").text(data.meals[0].strMeal);
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 
-                var recipeID = data.meals[0].idMeal;
+                let recipeID = data.meals[0].idMeal;
 
                 $(recipeEl).on("click", function reloadRecipe() {
                     clearBasicRecipeContents();
@@ -282,27 +276,27 @@ function displayRecipeOptions(menu) {
 }
 
 function previousRecipemealDB() {
-    recipeDetail = meals[meals.indexOf(recipeDetail) - 1];
-    displayRecipeOptions(recipeDetail);
+    if (recipeDetailIndex ===0){
+        return displayRecipeOptions(meals[0]);
+    }
+    recipeDetailIndex --;
+    displayRecipeOptions(meals[recipeDetailIndex]);
+}
+
+function nextRecipemealDB() {
+    recipeDetailIndex ++;
+    displayRecipeOptions(meals[recipeDetailIndex]);
 }
 
 $("#recipe-name").on("click", "#previous-btn", function () {
-
     clearBasicRecipeContents();
     previousRecipemealDB();
-
 });
-
-function nextRecipemealDB() {
-    recipeDetail = meals[meals.indexOf(recipeDetail) + 1];
-    displayRecipeOptions(recipeDetail);
-}
 
 $("#recipe-name").on("click", "#next-btn", function () {
     clearBasicRecipeContents();
     nextRecipemealDB();
 });
-
 
 $("#select1 li").click(function () {
     //Get the id of list items
