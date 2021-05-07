@@ -76,13 +76,13 @@ function runEdamam(keyword) {
 
             let ingredientsTitle = $('<h2>').addClass('title').text('Ingredients');
 
-            $("#recipe-ingredients").append(ingredientsTitle, ingredientsList);
+            let recipeLink = $("<a>")
+              .attr("href", data.hits[hitsIndex].recipe.url)
+              .attr("target", "_blank")
+              .text("Click here for recipe instructions")
+              .addClass("link");
 
-            let recipeLink = $("<a>").attr("href", data.hits[hitsIndex].recipe.url).attr("target", "_blank")
-                .text("Click here for recipe instructions")
-                .addClass('link');
-
-            $("#recipe-instructions").append(recipeLink);
+            $("#recipe-ingredients").append(ingredientsTitle, ingredientsList, recipeLink);
 
             // Saved Recipes
             let saveRecipeBtn = $("<button>")
