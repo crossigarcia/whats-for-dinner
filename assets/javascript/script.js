@@ -40,6 +40,8 @@ function runEdamam(keyword) {
     fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
+            $("#bg").addClass("bg-after");
+            
             let recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
             let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
             let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
@@ -76,13 +78,13 @@ function runEdamam(keyword) {
 
             let ingredientsTitle = $('<h2>').addClass('title').text('Ingredients');
 
-            let recipeLink = $("<a>")
-              .attr("href", data.hits[hitsIndex].recipe.url)
-              .attr("target", "_blank")
-              .text("Click here for recipe instructions")
-              .addClass("link");
+            $("#recipe-ingredients").append(ingredientsTitle, ingredientsList);
 
-            $("#recipe-ingredients").append(ingredientsTitle, ingredientsList, recipeLink);
+            let recipeLink = $("<a>").attr("href", data.hits[hitsIndex].recipe.url).attr("target", "_blank")
+                .text("Click here for recipe instructions")
+                .addClass('link');
+
+            $("#recipe-instructions").append(recipeLink);
 
             // Saved Recipes
             let saveRecipeBtn = $("<button>")
