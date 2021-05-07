@@ -47,12 +47,12 @@ function runEdamam(keyword) {
             if (hitsIndex === 4) {
                 // this is the attribute that disables the button
                 // nextButton.prop("disabled", true).addClass('disabled');
-                $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
             if (hitsIndex === 0) {
                 // previousButton.prop("disabled", true).addClass('disabled');
-                $(previousButton).attr('disabled', 'disabled');
+                $(previousButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
