@@ -199,12 +199,12 @@ function displayRecipeOptions(menu) {
             //disable next button if we have reached end of array  
             if (menu === meals[meals.length - 1]) {
                 // nextButton.prop("disabled", true).addClass("disabled");
-                $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
             //disable previous button if we have reached beginning of array
             if (menu === meals[0]) {
                 // previousButton.prop("disabled", true).addClass("disabled");
-                $(previousButton).attr('disabled', 'disabled');
+                $(previousButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
