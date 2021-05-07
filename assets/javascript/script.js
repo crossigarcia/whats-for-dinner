@@ -15,6 +15,7 @@ function clearBasicRecipeContents() {
     $("#ingredients").empty();
     $("#recipe-header").empty();
     $("#video").empty();
+    $("#recipe-instructions").empty();
 }
 
 var select = document.getElementById("select1");
@@ -47,12 +48,12 @@ function runEdamam(keyword) {
             if (hitsIndex === 4) {
                 // this is the attribute that disables the button
                 // nextButton.prop("disabled", true).addClass('disabled');
-                $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
             if (hitsIndex === 0) {
                 // previousButton.prop("disabled", true).addClass('disabled');
-                $(previousButton).attr('disabled', 'disabled');
+                $(previousButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
@@ -182,9 +183,10 @@ function displayRecipeOptions(menu) {
     fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
+            $('#bg').addClass('bg-after');
             const ingredients = [];
             //display recipe title, buttons, images
-            var recipeName = $('<h2 id="meal-id" data-mealid="' + menu + '">')
+            var recipeName = $('<h2>')
                 .addClass("title")
                 .text(data.meals[0].strMeal);
             var nextButton = $("<button>").attr("id", "next-btn").text("Next Recipe");
@@ -195,25 +197,25 @@ function displayRecipeOptions(menu) {
                 .attr("id", "save-recipe-btn")
                 .text("Save This Recipe");
 
-            $("#recipe-name").append(saveRecipeBtn);
+            // $("#recipe-name").append(saveRecipeBtn);
             //disable next button if we have reached end of array  
             if (menu === meals[meals.length - 1]) {
                 // nextButton.prop("disabled", true).addClass("disabled");
-                $(nextButton).attr('disabled', 'disabled');
+                $(nextButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
             //disable previous button if we have reached beginning of array
             if (menu === meals[0]) {
                 // previousButton.prop("disabled", true).addClass("disabled");
-                $(previousButton).attr('disabled', 'disabled');
+                $(previousButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
-            $("#recipe-name").append(recipeName, previousButton, nextButton);
+            $("#recipe-name").append(recipeName, previousButton, nextButton, saveRecipeBtn);
 
             var recipeImage = $("<img>").attr("src", data.meals[0].strMealThumb);
             $("#recipe-img").append(recipeImage);
             // Get all ingredients from the object. Up to 20
             var ingredientsList = $("<ul>").addClass("list");
-            let ingredientHeader = $("h2").addClass("title").text("Ingredients");
+            let ingredientHeader = $("<h2>").addClass("title").text("Ingredients");
             $("#recipe-ingredients").append(ingredientHeader);
 
             //get all the ingredients from the API
@@ -239,29 +241,31 @@ function displayRecipeOptions(menu) {
 
             //create title for ingredient and display all ingredients
             $("#recipe-ingredients").append(ingredientsList);
-            let recipeHeader = $("h2").addClass("title").text("Instructions");
-            $("#recipe-ingredients").append(recipeHeader);
+            let recipeHeader = $("<h2>").addClass("title").text("Instructions");
+            // $("#recipe-ingredients").append(recipeHeader);
 
             //get recipe instruction from API and display it
             var instructions = $("<p>")
                 .addClass("instr")
                 .text(data.meals[0].strInstructions);
-            $("#recipe-ingredients").append(instructions);
+            $("#recipe-instructions").append(recipeHeader, instructions);
 
             //get the video URL and display it
-            let videoHeader = $("h2").addClass("title").text("Video Recipe");
+            let videoHeader = $("<h2>").addClass("title video-title").text("Video Recipe");
             var test = data.meals[0].strYoutube.slice(-11);
             $("#video").append(videoHeader);
             var iframe = document.createElement("iframe");
             iframe.src = "https://www.youtube.com/embed/" + test;
-            iframe.width = "420";
-            iframe.height = "315";
+            iframe.width = "750";
+            iframe.height = "400";
             $("#video").append(iframe);
 
             $("#save-recipe-btn").on("click", function () {
                 $(".saved-recipes").addClass("");
 
-                let recipeEl = $("<button>").text(data.meals[0].strMeal);
+                let recipeEl = $("<button>")
+                  .text(data.meals[0].strMeal)
+                  .addClass("saved-recipe");
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 

@@ -6,14 +6,18 @@ html, body {
 
 .bg {
     min-height: 100%;
-  min-width: 1024px;
-	
-  width: 100%;
-  height: auto;
-	
-  position: fixed;
-  top: 0;
-  left: 0;
+    min-width: 1024px;
+        
+    width: 100%;
+    height: auto;
+        
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bg-after {
+    opacity: 0.4;
 }
  
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
@@ -44,6 +48,7 @@ html, body {
     border-radius: 6px;
     width: 80%;
     top: 87%;
+    margin: auto auto 25px 15px;
 }
 
 .criteria-button {
@@ -56,6 +61,7 @@ html, body {
     transition: all 0.4s ease 0s;
     border-radius: 6px;
     width: 80%;
+    margin: auto auto 25px 15px;
 }
 
 .search-btn {
@@ -68,21 +74,23 @@ html, body {
     transition: all 0.4s ease 0s;
     border-radius: 6px;
     width: 100%;
+    margin: auto auto 15px 15px;
 }
 
 #save-recipe-btn {
-    position:absolute;
-    top: 112%;
-    left: 39%;
+    position:relative;
+    /* top: 112%;
+    left: 39%; */
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
     background: black;
-    padding: 15px;
+    padding: 5px;
     border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
+    margin: auto auto 15px auto;
 }
 
 #nxt-btn, #next-btn, #prev-btn, #previous-btn {
@@ -92,12 +100,14 @@ html, body {
     text-transform: uppercase;
     text-decoration: none;
     background: black;
-    padding: 15px;
+    padding: 5px;
     border: 4px solid black !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
+    margin: 0 15px 15px 25px;
     }
+
 
 .link a {
     position: absolute;
@@ -146,37 +156,43 @@ img, img {
 .list {
     position: relative;
     font-weight: bold;
-    padding-left: 0px;
+    padding-left: 25px;
     color: black;
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 20%;
+    right: 30%;
 }
 
 .recipe-video {
     position: relative;
+    margin-bottom: 30px;
 }
 
 p {
+    text-align: justify;
     position: relative;
     font-weight: bold;
-    padding-left: 0px;
+    padding: 15px;
     color: black;
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 92%;
-    width: 183%;
+    margin: 0 20px 0 0;
 }
 
 .title {
+    text-align: center;
     position: relative;
     font-weight: bold;
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
     width: 44%;
+}
+
+.video-title {
+    margin-top: 20px;
 }
 
 /* #previous-searches 
@@ -190,4 +206,8 @@ p {
     color: white;
     border-radius: 15px;
     border: 4px solid black;
+}
+
+footer {
+    margin-top: 30px;
 }
