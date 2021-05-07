@@ -15,6 +15,7 @@ function clearBasicRecipeContents() {
     $("#ingredients").empty();
     $("#recipe-header").empty();
     $("#video").empty();
+    $("#recipe-instructions").empty();
 }
 
 var select = document.getElementById("select1");
@@ -196,7 +197,7 @@ function displayRecipeOptions(menu) {
                 .attr("id", "save-recipe-btn")
                 .text("Save This Recipe");
 
-            $("#recipe-name").append(saveRecipeBtn);
+            // $("#recipe-name").append(saveRecipeBtn);
             //disable next button if we have reached end of array  
             if (menu === meals[meals.length - 1]) {
                 // nextButton.prop("disabled", true).addClass("disabled");
@@ -208,7 +209,7 @@ function displayRecipeOptions(menu) {
                 $(previousButton).attr('disabled', 'disabled').attr('id', 'disabled');
             }
 
-            $("#recipe-name").append(recipeName, previousButton, nextButton);
+            $("#recipe-name").append(recipeName, previousButton, nextButton, saveRecipeBtn);
 
             var recipeImage = $("<img>").attr("src", data.meals[0].strMealThumb);
             $("#recipe-img").append(recipeImage);
@@ -241,22 +242,22 @@ function displayRecipeOptions(menu) {
             //create title for ingredient and display all ingredients
             $("#recipe-ingredients").append(ingredientsList);
             let recipeHeader = $("<h2>").addClass("title").text("Instructions");
-            $("#recipe-ingredients").append(recipeHeader);
+            // $("#recipe-ingredients").append(recipeHeader);
 
             //get recipe instruction from API and display it
             var instructions = $("<p>")
                 .addClass("instr")
                 .text(data.meals[0].strInstructions);
-            $("#recipe-ingredients").append(instructions);
+            $("#recipe-instructions").append(recipeHeader, instructions);
 
             //get the video URL and display it
-            let videoHeader = $("<h2>").addClass("title").text("Video Recipe");
+            let videoHeader = $("<h2>").addClass("title video-title").text("Video Recipe");
             var test = data.meals[0].strYoutube.slice(-11);
             $("#video").append(videoHeader);
             var iframe = document.createElement("iframe");
             iframe.src = "https://www.youtube.com/embed/" + test;
-            iframe.width = "420";
-            iframe.height = "315";
+            iframe.width = "750";
+            iframe.height = "400";
             $("#video").append(iframe);
 
             $("#save-recipe-btn").on("click", function () {

@@ -79,8 +79,8 @@ html, body {
 
 #save-recipe-btn {
     position:relative;
-    top: 112%;
-    left: 39%;
+    /* top: 112%;
+    left: 39%; */
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -105,6 +105,7 @@ html, body {
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
+    margin: 0 15px 15px 25px;
     }
 
 
@@ -165,27 +166,33 @@ img, img {
 
 .recipe-video {
     position: relative;
+    margin-bottom: 30px;
 }
 
 p {
+    text-align: justify;
     position: relative;
     font-weight: bold;
-    padding-left: 0px;
+    padding: 15px;
     color: black;
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 92%;
-    width: 183%;
+    margin: 0 20px 0 0;
 }
 
 .title {
+    text-align: center;
     position: relative;
     font-weight: bold;
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
     width: 44%;
+}
+
+.video-title {
+    margin-top: 20px;
 }
 
 /* #previous-searches 
@@ -201,3 +208,6 @@ p {
     border: 4px solid black;
 }
 
+footer {
+    margin-top: 30px;
+}
