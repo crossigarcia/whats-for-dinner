@@ -261,7 +261,9 @@ function displayRecipeOptions(menu) {
             $("#save-recipe-btn").on("click", function () {
                 $(".saved-recipes").addClass("");
 
-                let recipeEl = $("<button>").text(data.meals[0].strMeal);
+                let recipeEl = $("<button>")
+                  .text(data.meals[0].strMeal)
+                  .addClass("saved-recipe");
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 
