@@ -217,10 +217,6 @@ footer {
 }
 
 
-/*QUERY FOR TABLETS*/
-@media screen and (max-width: 768px) {
-
-}
 /* QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
 
@@ -236,7 +232,14 @@ footer {
         position: relative;
     }
 
+    .list {
+        width:max-content;
 
+    }
+
+    img, img {
+        width: max-content;
+    }
 
 }
 
