@@ -1,3 +1,7 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -19,29 +23,24 @@ html, body {
 .bg-after {
     opacity: 0.4;
 }
- 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-  img.bg {
-    left: 50%;
-    margin-left: -512px;   /* 50% */
-  }
-
-}
 
 .header-name {
     color: white;
+    font-family: 'Raleway', sans-serif;
     font-weight: bold;
-    background-color: whitesmoke;
-    background: repeating-linear-gradient(85deg, black, transparent 100px);
-    border-radius: 5%;
+    background: rgba(194, 63, 19, 0.8);
+    border-radius: 10%;
+    border: 4px solid rgba(194, 63, 19, 0.9) !important;
+    /* background-image: linear-gradient(to right, rgba(227, 218, 216, 0.9), rgba(194, 63, 19, 0.7)); */
+    padding: 15px;
     
 }
 
-.keyword-button {
-    background: black;
+.keyword-button, .criteria-button {
+    background: rgba(194, 63, 19, 0.8);
     color: white;
     padding: 15px;
-    border: 4px solid black !important;
+    border: 4px solid rgba(194, 63, 19, 0.9) !important;
     text-transform: uppercase;
     display: inline-block;
     transition: all 0.4s ease 0s;
@@ -51,21 +50,8 @@ html, body {
     margin: auto auto 25px 15px;
 }
 
-.criteria-button {
-    background: black;
-    color: white;
-    padding: 15px;
-    border: 4px solid black !important;
-    text-transform: uppercase;
-    display: inline-block;
-    transition: all 0.4s ease 0s;
-    border-radius: 6px;
-    width: 80%;
-    margin: auto auto 25px 15px;
-}
-
 .search-btn {
-    background: black;
+    background: rgba(194, 63, 19, 0.8);
     color: white;
     padding: 15px;
     border: 4px solid white !important;
@@ -84,9 +70,9 @@ html, body {
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: black;
+    background: rgba(194, 63, 19, 0.8);
     padding: 5px;
-    border: 4px solid black !important;
+    border: 4px solid rgba(194, 63, 19, 0.9) !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
@@ -99,38 +85,37 @@ html, body {
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: black;
+    background: rgba(194, 63, 19, 0.8);
     padding: 5px;
-    border: 4px solid black !important;
+    border: 4px solid rgba(194, 63, 19, 0.9) !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
-    margin: 0 15px 15px 25px;
+    margin: 0 200px 15px 0;
     }
 
 
-.link a {
+.link {
     position: absolute;
-    top: 103%;
-    left: 33%;
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: black;
-    padding: 15px;
-    border: 4px solid black !important;
+    background: rgba(194, 63, 19, 0.8);
+    padding: 10px;
+    border: 4px solid rgba(194, 63, 19, 0.5) !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
+    margin-top: 20px;
 }
 
 .saved-searches-cont {
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: black;
-    padding: 15px;
-    border: 4px solid black !important;
+    background: rgba(194, 63, 19, 0.8);
+    padding: 10px;
+    border: 4px solid rgba(194, 63, 19, 0.9) !important;
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
@@ -139,9 +124,9 @@ html, body {
 }
 
 #nxt-btn:hover, #prev-btn:hover, #save-recipe-btn:hover, .search-btn:hover, .link a:hover, .criteria-button:hover, .keyword-button:hover, #previous-btn:hover, #next-btn:hover, .saved-searches-cont:hover {
-    color: #ffffff !important;
-    background: rgb(141, 140, 140);
-    border-color: rgb(141, 140, 140) !important;
+    color: rgba(194, 63, 19, 0.9) !important;
+    background: rgba(227, 218, 216, 0.9);
+    border-color: rgba(227, 218, 216, 0.7) !important;
     transition: all 0.4s ease 0s;
     }
 
@@ -149,18 +134,18 @@ img, img {
     position: relative;
     width: 385px;
     border-style: solid;
-    border: 4px solid #494949;
+    border: 4px solid rgba(194, 63, 19, 0.7);
     border-radius: 6px;
 }
 
 .list {
     position: relative;
-    font-weight: bold;
-    padding-left: 25px;
+    /* font-weight: bold; */
+    padding: 15px 15px 15px 35px;
     color: black;
-    background: lightgrey;
+    background: white;
     border-radius: 15px;
-    border: 4px solid #494949;
+    border: 4px solid rgba(194, 63, 19, 0.7);
     /* right: 30%; */
 }
 
@@ -170,24 +155,28 @@ img, img {
 }
 
 p {
-    text-align: justify;
+    text-align: left;
     position: relative;
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 15px;
     color: black;
-    background: lightgrey;
+    background: white;
     border-radius: 15px;
-    border: 4px solid #494949;
+    border: 4px solid rgba(194, 63, 19, 0.7);
     margin: 0 20px 0 0;
+    line-height: 2em;
+    width: 200%;
 }
 
 .title {
+    color: rgba(194, 63, 19, 1);
     text-align: center;
     position: relative;
+    font-family: 'Raleway', sans-serif;
     font-weight: bold;
-    background: lightgrey;
+    background: white;
     border-radius: 15px;
-    border: 4px solid #494949;
+    border: 4px solid rgba(194, 63, 19, 0.7);
     width: 44%;
 }
 
@@ -202,10 +191,18 @@ p {
 .saved-recipe {
     position: relative;
     font-weight: bold;
-    background: black;
-    color: white;
+    color: rgba(194, 63, 19, 0.9) !important;
+    background: white;
+    border-color: rgba(227, 218, 216, 0.7) !important;
     border-radius: 15px;
-    border: 4px solid black;
+    
+}
+
+.drop-list {
+    background-color: rgba(227, 218, 216, 0.9);
+    border: 4px solid rgba(194, 63, 19, 0.7);
+    border-radius: 15px;
+    padding: 50px;
 }
 
 footer {
@@ -216,7 +213,60 @@ footer {
     position: fixed;
 }
 
+.recipe-video {
+    position: relative;
+    margin-bottom: 100px;
+    overflow: hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
 
+.recipe-video iframe {
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    margin-top: 75px;
+}
+
+@media screen and (max-width: 1024px) {
+    img.bg {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
+
+    .title {
+        width:90%;
+    }
+
+    #recipe-ingredients {
+        width: max-content;
+    }
+
+    .search-btns-position {
+        position: relative;
+    }
+
+}
+
+
+/*QUERY FOR TABLETS*/
+@media screen and (max-width: 768px) {
+    .title {
+        width:90%;
+    }
+
+    #recipe-ingredients {
+        width: max-content;
+    }
+
+    .search-btns-position {
+        position: relative;
+    }
+
+}
 /* QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
 

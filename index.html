@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/css/uikit.min.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,800&display=swap" rel="stylesheet">
     <title>What's For Dinner?</title>
 </head>
 <body>
@@ -59,7 +60,7 @@
                         <!-- <div id="previous-searches">
                         </div>     -->
                         <button class="saved-searches-cont" type="button"> Saved Searches</button>
-                            <div uk-drop="mode: click">
+                            <div uk-drop="mode: click" class="drop-list">
                                 <div class="uk-inline saved-recipes"></div>
                             </div>   
                     </div>
@@ -71,14 +72,13 @@
                         <div class="uk-width-1-2">
                             <div id="recipe-img"></div>
                         </div>
-                        <div id="recipe-steps" class="uk-width-2-3@m uk-width-2-3">
+                        <div id="recipe-steps" class="uk-width-2-3@m uk-width-1-2@l uk-width-1-8@xl">
                             <div id="recipe-ingredients"></div>
                         </div>
                         <div id="recipe-instructions" class="uk-width-1-2@m uk-width-10-20@xl">     
                         </div> 
                     </div>
-                    <div class="link"></div>
-                    <div class="uk-width-1-2@m recipe-video" id ="video"></div>
+                    <div class="recipe-video" id ="video"></div>
                 </div>
             </div>
         </div>
@@ -94,6 +94,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.20/dist/js/uikit-icons.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="iconic.min.js"></script>
     <script src="./assets/javascript/script.js"></script>
 </body>
 

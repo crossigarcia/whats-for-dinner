@@ -10,7 +10,6 @@ function clearBasicRecipeContents() {
     $("#recipe-name").empty();
     $("#recipe-img").empty();
     $("#recipe-ingredients").empty();
-    $(".link").empty();
     $(".recipe-video").empty();
     $("#ingredients").empty();
     $("#recipe-header").empty();
@@ -28,7 +27,7 @@ function logValue() {
 $("#keyword-btn").on("click", function () {
     clearBasicRecipeContents();
 
-    var keyword = $("#keyword").val().trim();
+    let keyword = $("#keyword").val().trim();
 
     runEdamam(keyword);
     searchHistory(keyword);
@@ -41,9 +40,11 @@ function runEdamam(keyword) {
     fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
-            var recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
-            var nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
-            var previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
+            $("#bg").addClass("bg-after");
+            
+            let recipeName = $("<h2>").addClass("title").text(data.hits[hitsIndex].recipe.label);
+            let nextButton = $("<button>").attr("id", "nxt-btn").text("Next Recipe");
+            let previousButton = $("<button>").attr("id", "prev-btn").text("Previous Recipe");
 
             if (hitsIndex === 4) {
                 // this is the attribute that disables the button
@@ -58,34 +59,35 @@ function runEdamam(keyword) {
 
             $("#recipe-name").append(recipeName, previousButton, nextButton);
 
-            var recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
+            let recipeImg = $("<img>").attr("src", data.hits[hitsIndex].recipe.image);
             $("#recipe-img").append(recipeImg);
             // copied to compare 
 
-            var ingredientsList = $("<ul>").addClass("list");
+            let ingredientsList = $("<ul>").addClass("list");
             for (
-                var i = 0;
+                let i = 0;
                 i < data.hits[hitsIndex].recipe.ingredientLines.length;
                 i++
             ) {
-                var ingredientItem = $("<li>")
+                let ingredientItem = $("<li>")
                     .addClass("list-item")
                     .text(data.hits[hitsIndex].recipe.ingredientLines[i]);
 
                 ingredientsList.append(ingredientItem);
             }
 
-            $("#recipe-ingredients").append(ingredientsList);
+            let ingredientsTitle = $('<h2>').addClass('title').text('Ingredients');
 
-            var recipeLink = $("<a>")
-                .attr("href", data.hits[hitsIndex].recipe.url)
-                .attr("target", "_blank")
-                .text("Click here for recipe instructions");
+            $("#recipe-ingredients").append(ingredientsTitle, ingredientsList);
 
-            $(".link").append(recipeLink);
+            let recipeLink = $("<a>").attr("href", data.hits[hitsIndex].recipe.url).attr("target", "_blank")
+                .text("Click here for recipe instructions")
+                .addClass('link');
+
+            $("#recipe-instructions").append(recipeLink);
 
             // Saved Recipes
-            var saveRecipeBtn = $("<button>")
+            let saveRecipeBtn = $("<button>")
                 .attr("id", "save-recipe-btn")
                 .text("Save This Recipe");
 
@@ -94,11 +96,11 @@ function runEdamam(keyword) {
             $("#save-recipe-btn").on("click", function () {
                 $(".saved-recipes").addClass("");
 
-                var recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label).addClass("saved-recipe");
+                let recipeEl = $("<button>").text(data.hits[hitsIndex].recipe.label).addClass("saved-recipe");
                 // append to the container div
                 $(".saved-recipes").append(recipeEl);
 
-                var recipeID = data.hits[hitsIndex].recipe.label;
+                let recipeID = data.hits[hitsIndex].recipe.label;
 
                 $(recipeEl).on("click", function reloadRecipe() {
                     clearBasicRecipeContents();
@@ -115,7 +117,7 @@ function runEdamam(keyword) {
 }
 
 function nextRecipe() {
-    var keyword = $("#keyword").val().trim();
+    let keyword = $("#keyword").val().trim();
     hitsIndex++;
     runEdamam(keyword);
 }
@@ -127,7 +129,7 @@ $("#recipe-name").on("click", "#nxt-btn", function () {
 });
 
 function previousRecipe() {
-    var keyword = $("#keyword").val().trim();
+    let keyword = $("#keyword").val().trim();
     hitsIndex--;
     runEdamam(keyword);
 }
@@ -245,9 +247,8 @@ function displayRecipeOptions(menu) {
             // $("#recipe-ingredients").append(recipeHeader);
 
             //get recipe instruction from API and display it
-            var instructions = $("<p>")
-                .addClass("instr")
-                .text(data.meals[0].strInstructions);
+            var instructions = $("<p>").addClass("instr").text(data.meals[0].strInstructions);
+
             $("#recipe-instructions").append(recipeHeader, instructions);
 
             //get the video URL and display it
@@ -256,8 +257,9 @@ function displayRecipeOptions(menu) {
             $("#video").append(videoHeader);
             var iframe = document.createElement("iframe");
             iframe.src = "https://www.youtube.com/embed/" + test;
-            iframe.width = "750";
-            iframe.height = "400";
+            // iframe.width = "750";
+            // iframe.height = "400";
+            $('iframe').addClass('video-display');
             $("#video").append(iframe);
 
             $("#save-recipe-btn").on("click", function () {
