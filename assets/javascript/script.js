@@ -257,8 +257,9 @@ function displayRecipeOptions(menu) {
             $("#video").append(videoHeader);
             var iframe = document.createElement("iframe");
             iframe.src = "https://www.youtube.com/embed/" + test;
-            iframe.width = "750";
-            iframe.height = "400";
+            // iframe.width = "750";
+            // iframe.height = "400";
+            $('iframe').addClass('video-display');
             $("#video").append(iframe);
 
             $("#save-recipe-btn").on("click", function () {
