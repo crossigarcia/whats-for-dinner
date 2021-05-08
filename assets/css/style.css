@@ -18,18 +18,12 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: -1;
 }
 
 .bg-after {
     opacity: 0.4;
-}
- 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-  img.bg {
-    left: 50%;
-    margin-left: -512px;   /* 50% */
-  }
-
+    z-index: -1;
 }
 
 .header-name {
@@ -99,12 +93,28 @@ html, body {
     display: inline-block;
     transition: all 0.4s ease 0s;
     border-radius: 6px;
-    margin: 0 200px 15px 0;
-    }
+    margin: 0 30px 15px 0;
+}
+
+#disabled {
+    position: relative;
+    left: 0%;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    border-radius: 6px;
+    margin: 0 30px 15px 0;
+    color: black;
+    background: rgba(227, 218, 216, 0.9);
+    border-color: rgba(227, 218, 216, 0.7) !important;
+    
+}
 
 
 .link {
-    position: absolute;
+    /* position: absolute; */
     color: white !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -144,6 +154,7 @@ img, img {
     border-style: solid;
     border: 4px solid rgba(194, 63, 19, 0.7);
     border-radius: 6px;
+    /* margin: 10px auto 20px auto; */
 }
 
 .list {
@@ -185,6 +196,7 @@ p {
     border-radius: 15px;
     border: 4px solid rgba(194, 63, 19, 0.7);
     width: 44%;
+    padding: 5px 15px 5px 15px;
 }
 
 .video-title {
@@ -236,6 +248,14 @@ footer {
     width:100%;
     position:absolute;
     margin-top: 75px;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+
 }
 
 
