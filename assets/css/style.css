@@ -237,6 +237,25 @@ footer {
     position: fixed;
 }
 
+.recipe-video {
+    position: relative;
+    margin-bottom: 100px;
+    overflow: hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+
+.recipe-video iframe {
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    margin-top: 75px;
+}
+
+
 /*QUERY FOR TABLETS*/
 @media screen and (max-width: 768px) {
 
