@@ -161,7 +161,7 @@ img, img {
     background: lightgrey;
     border-radius: 15px;
     border: 4px solid #494949;
-    right: 30%;
+    /* right: 30%; */
 }
 
 .recipe-video {
@@ -211,3 +211,32 @@ p {
 footer {
     margin-top: 30px;
 }
+
+.search-btns-position {
+    position: fixed;
+}
+
+
+/*QUERY FOR TABLETS*/
+@media screen and (max-width: 768px) {
+
+}
+/* QUERY FOR MOBILE PHONES */
+@media screen and (max-width: 575px) {
+
+    .title {
+        width:90%;
+    }
+
+    #recipe-ingredients {
+        width: max-content;
+    }
+
+    .search-btns-position {
+        position: relative;
+    }
+
+
+
+}
+
