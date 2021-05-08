@@ -23,14 +23,6 @@ html, body {
 .bg-after {
     opacity: 0.4;
 }
- 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-  img.bg {
-    left: 50%;
-    margin-left: -512px;   /* 50% */
-  }
-
-}
 
 .header-name {
     color: white;
@@ -238,9 +230,40 @@ footer {
     margin-top: 75px;
 }
 
+@media screen and (max-width: 1024px) {
+    img.bg {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
+
+    .title {
+        width:90%;
+    }
+
+    #recipe-ingredients {
+        width: max-content;
+    }
+
+    .search-btns-position {
+        position: relative;
+    }
+
+}
+
 
 /*QUERY FOR TABLETS*/
 @media screen and (max-width: 768px) {
+    .title {
+        width:90%;
+    }
+
+    #recipe-ingredients {
+        width: max-content;
+    }
+
+    .search-btns-position {
+        position: relative;
+    }
 
 }
 /* QUERY FOR MOBILE PHONES */
