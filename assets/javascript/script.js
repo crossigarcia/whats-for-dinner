@@ -31,7 +31,7 @@ $("#keyword-btn").on("click", function () {
     var keyword = $("#keyword").val().trim();
 
     runEdamam(keyword);
-    searchHistory(keyword);
+    // searchHistory(keyword);
 });
 
 function runEdamam(keyword) {

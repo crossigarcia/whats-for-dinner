@@ -110,7 +110,7 @@ html, body {
 
 
 .link a {
-    position: absolute;
+    position: sticky;
     top: 103%;
     left: 33%;
     color: white !important;
