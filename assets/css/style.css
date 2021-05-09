@@ -168,28 +168,6 @@ img, img {
     /* right: 30%; */
 }
 
-.video-title {
-    margin-top: 150px;
-}
-
-.recipe-video {
-    position: relative;
-    margin-bottom: 30px;
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-    margin-top: 50px;
-}
-
-.recipe-video iframe {
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-}
-
 p {
     text-align: left;
     position: relative;
@@ -267,6 +245,11 @@ p {
     width:100%;
     position:absolute;
     margin-top: 75px;
+}
+
+.recipe-video {
+    position: relative;
+    margin-bottom: 30px;
 }
 
 footer h4 {
