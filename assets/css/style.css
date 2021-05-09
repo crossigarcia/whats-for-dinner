@@ -204,6 +204,12 @@ p {
     width: 44%;
 }
 
+.instr {
+    width: 769px;
+    padding: 20px;
+}
+
+
 .video-title {
     margin-top: 20px;
 }
@@ -258,7 +264,9 @@ footer {
 
 /*QUERY FOR TABLETS*/
 @media screen and (max-width: 768px) {
-
+    .instr {
+        padding: 25px;
+    }
 }
 /* QUERY FOR MOBILE PHONES */
 @media screen and (max-width: 575px) {
