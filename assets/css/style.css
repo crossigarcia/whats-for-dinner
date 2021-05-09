@@ -168,11 +168,6 @@ img, img {
     /* right: 30%; */
 }
 
-.recipe-video {
-    position: relative;
-    margin-bottom: 30px;
-}
-
 p {
     text-align: left;
     position: relative;
@@ -244,6 +239,11 @@ p {
     width:100%;
     position:absolute;
     margin-top: 75px;
+}
+
+.recipe-video {
+    position: relative;
+    margin-bottom: 30px;
 }
 
 footer h4 {
