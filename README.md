@@ -28,6 +28,9 @@ I WANT the ability to search for recipes based on the ingredients I have availab
 ## Video of Application Functionality
 https://drive.google.com/file/d/1gBceawgVDbWnFCNGmVuP3BL_oCPxk_U-/view
 
+## Screenshot
+![What's For Dinner Screenshot](/assets/images/wfd-screenshot.png)
+
 ## Link to Deployed Application
 
 https://nicopetelo.github.io/whats-for-dinner/
